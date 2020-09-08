@@ -1,8 +1,5 @@
 /*
 COLOURS
-orange:     #FF7A1A
-light grey: #AAAAAA
-dark grey:  #555555
 */
 
 .nav ul {
@@ -35,4 +32,15 @@ dark grey:  #555555
   color: #1F73ED;
 }
 
-
+.image-right,
+.image-left {
+  max-width:300px;
+}
+.image-left {
+  float:left;
+  margin-right:30px
+}
+.image-right {
+  float:right;
+  margin-left:30px
+}
