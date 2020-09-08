@@ -1,5 +1,5 @@
 This is a test of my github pages!
 
-I am fun!
+Debugging is fun
 
 # This is a section
