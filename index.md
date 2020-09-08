@@ -1,3 +1,5 @@
+![alt text](https://github.com/jorgensd/jsdokken/cropped.jpg)
+
 Welcome to my personal web-page. Here you can find information about me, and the projects I have been working on during my post-graduate studies.
 
 # Latest news
