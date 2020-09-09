@@ -2,6 +2,10 @@
 COLOURS
 */
 
+body {
+  color: black
+}
+
 .nav ul {
   list-style-type: none;
   margin: 0;
@@ -43,4 +47,29 @@ COLOURS
 .image-right {
   float:right;
   margin-left:30px
+}
+
+.paper {
+  margin-left:10px;margin-right:10px;
+  padding-left:30px;padding-right:30px;
+  border-left: #1F73ED 5px solid;
+  border-right: #1F73ED 5px solid;
+  padding-bottom:0;
+  margin-bottom:20px
+}
+
+.paper:target {
+  padding-left:10px;padding-right:10px;
+  border-left: #1F73ED 25px solid;
+  border-right: #1F73ED 25px solid;
+}
+
+a, a:link, a:visited, a:active {
+  color: #1F73ED
+}
+
+a:hover {
+  color: #000000;
+  text-decoration: underline;
+  text-decoration-color: #1F73ED
 }
