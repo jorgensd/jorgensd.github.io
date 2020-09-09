@@ -4,6 +4,30 @@ title: Papers
 
 A list of papers will appear here in the future.
 For now, have a look at my [Google scholar page](https://scholar.google.no/citations?user=hfeXoYMAAAAJ&hl=no&oi=ao)
+## 2020
+{% include _paper.html
+    id="dokken2020navier"
+	author = "J. S. Dokken and A. Johansson and A. Massing and S. W. Funke"
+	doi = "10.1016/j.cma.2020.113129"
+	issn = "0045-7825"
+	journal = "Computer Methods in Applied Mechanics and Engineering"
+	pages = "113129"
+	title = "A multimesh finite element method for the Navier--Stokes equations based on projection methods"
+	volume = "368"
+	year = "2020"
+    bib = "dokken2020navier.bib"
+%}
+
+{% include _paper.html
+    id = "dokken2020automatic"
+    title = "Automatic shape derivatives for transient PDEs in FEniCS and Firedrake"
+    author= "J. S. Dokken and S. K. Mitusch and S W. Funke"
+    year= "2020"
+    arxiv = "2001.10058"
+    bib = "dokken2020shape.bib"
+%}
+
+
 ## 2019
 {% include _paper.html
     id="dokken2019shape"
@@ -55,10 +79,12 @@ For now, have a look at my [Google scholar page](https://scholar.google.no/citat
     author = "J. S. Dokken and J. Grue and L. P. Karstensen"
     title = "Wave forces on porous geometries with linear and quadratic pressure-velocity relations"
     volume = "32"
-    booktitle = "Proc. Int. Workshop Water Waves Float. Bodies"
+    journal = "Proc. Int. Workshop Water Waves Float. Bodies"
     year = "2017"
     pdf = "http://www.iwwwfb.org/Abstracts/iwwwfb32/iwwwfb32_16.pdf"
     bib = "dokken2017quadratic.bib"
 %}
 
-[test](papers.md#Scroggs2017)
+
+
+[test](papers.md#dokken2017linear)
