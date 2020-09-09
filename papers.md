@@ -16,7 +16,7 @@ title: Papers
 %}
 
 {% include _paper.html
-    id = "dokken2020automatic"
+    id = "dokken2020shape"
     title = "Automatic shape derivatives for transient PDEs in FEniCS and Firedrake"
     author= "J. S. Dokken and S. K. Mitusch and S W. Funke"
     year= "2020"
@@ -108,4 +108,3 @@ For related research, have a look at my [Google scholar page](https://scholar.go
     bib = "dokken2016thesis.bib"
 %}
 
-[test](papers.md#dokken2017linear)
