@@ -1,9 +1,6 @@
 ---
 title: Papers
 ---
-
-A list of papers will appear here in the future.
-For now, have a look at my [Google scholar page](https://scholar.google.no/citations?user=hfeXoYMAAAAJ&hl=no&oi=ao)
 ## 2020
 {% include _paper.html
     id="dokken2020navier"
@@ -85,6 +82,30 @@ For now, have a look at my [Google scholar page](https://scholar.google.no/citat
     bib = "dokken2017quadratic.bib"
 %}
 
+For related research, have a look at my [Google scholar page](https://scholar.google.no/citations?user=hfeXoYMAAAAJ&hl=no&oi=ao).
 
+# Theses
+
+{% include _paper.html
+    id = "dokken2020thesis"
+	author = "J. S. Dokken"
+	school = "University of Oslo"
+	title = "Shape Optimization for Finite Element Methods"
+	year = "2020"
+    thesis = "PhD thesis"
+    bib = "dokken2020thesis.bib"
+%}
+
+{% include _paper.html
+    id = "dokken2016thesis"
+	author = "J. S. Dokken"
+	school = "University of Oslo"
+	title = "Beregninger av f&oslash;rste- og andreordens krefter på por&oslash;se geometrier med line&aelig;r og kvadratisk hastighet-trykk relasjon"
+	year = "2016"
+    thesis = "Master thesis"
+    url = "http://urn.nb.no/URN:NBN:no-55383"
+    pdf = "https://www.duo.uio.no/bitstream/handle/10852/51950/masteroppgave_jorgen_schartum_dokken.pdf?sequence=1&isAllowed=y"
+    bib = "dokken2016thesis.bib"
+%}
 
 [test](papers.md#dokken2017linear)

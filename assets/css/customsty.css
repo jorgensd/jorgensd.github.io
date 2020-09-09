@@ -52,16 +52,16 @@ body {
 .paper {
   margin-left:10px;margin-right:10px;
   padding-left:30px;padding-right:30px;
-  border-left: #1F73ED 5px solid;
-  border-right: #1F73ED 5px solid;
+  border-left: #1F73ED 1px solid;
+  border-right: #1F73ED 1px solid;
   padding-bottom:0;
   margin-bottom:20px
 }
 
 .paper:target {
-  padding-left:10px;padding-right:10px;
-  border-left: #1F73ED 25px solid;
-  border-right: #1F73ED 25px solid;
+  padding-left:25px;padding-right:25px;
+  border-left: #a30c0c 10px solid;
+  border-right: #a30c0c 10px solid;
 }
 
 a, a:link, a:visited, a:active {
