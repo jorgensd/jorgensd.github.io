@@ -138,5 +138,6 @@ a:hover {
 }
 
 .inner {
-  position: relative
+  position: relative;
+  width: 750px
 }
