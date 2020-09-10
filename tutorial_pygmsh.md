@@ -74,6 +74,6 @@ mesh = generate_mesh(
         geometry, prune_z_0=True,
         geo_filename="mesh.geo", msh_filename="mesh.msh")
 ```
-To full script for this code can be downloaded [here](tutorial_pygmsh.py).
+The full script for this code can be downloaded [here](tutorial_pygmsh.py).
 
 ## <a name="third"></a>3. How to load existing "msh"-files into dolfin and dolfinx
