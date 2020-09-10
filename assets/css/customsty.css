@@ -139,5 +139,6 @@ a:hover {
 
 .inner {
   position: relative;
-  width: 750px
+  width: unset;
+  max-width:  750px
 }
