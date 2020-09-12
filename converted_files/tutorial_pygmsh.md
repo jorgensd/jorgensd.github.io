@@ -5,6 +5,7 @@ In this tutorial, you will learn:
 2. [How to create 3D meshes with pygmsh](#second)
 3. [How to create an XDMF-file than can be imported in either dolfin or dolfinx](#third)
 
+This tutorial can be downloaded as a [Python-file](../converted_files/tutorial_pygmsh.py) or as a [Jupyter notebook](../converted_files/tutorial_pygmsh.ipynb)
 
 Prerequisites for this tutorial is to install pygmsh[>=6.1.1](https://pypi.org/project/pygmsh/6.1.1/), meshio[>=4.1.1](https://pypi.org/project/meshio/4.1.1/) and gmsh[>=4.6.0](https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64.tgz). All of these dependencies can be found in the docker image
 `dolfinx/dev-env`, which can be ran on any computer with docker using
@@ -13,6 +14,9 @@ docker run -ti -v $(pwd):/home/shared -w /home/shared --rm dolfinx/dev-env
 ```
 ## <a name="first"></a> 1. How to create a mesh with pygmsh
 In this tutorial, we will learn how to create a channel with a circular obstacle, as used in the [DFG-2D 2 Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_benchmark2_re100.html).
+
+
+
 
 To do this, we use pygmsh.
 First we create an empty geometry and the circular obstacle:
@@ -87,7 +91,6 @@ mesh = generate_mesh(
     geo file: mesh.geo
 
 
-The full script for this code can be downloaded [here](../converted_files/tutorial_pygmsh.py).
 ## <a name="second"></a>2. How to create a 3D mesh using pygmsh
 To create more advanced meshes, such as 3D geometries, using the OpenCASCADE geometry kernel is recommended.
 We start by importing this kernel, and creating three objects:
