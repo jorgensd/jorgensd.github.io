@@ -1,2 +1,7 @@
 theme: jekyll-theme-tactile
 title: Jørgen S. Dokken
+
+titles_from_headings:
+  enabled:     true
+  strip_title: true
+  collections: true
