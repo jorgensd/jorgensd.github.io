@@ -13,5 +13,5 @@ start-notebook:
 
 
 convert:
-	jupyter nbconvert --to python tutorial_pygmsh.ipynb --output=converted_files/tutorial_pygmsh.py
-	jupyter nbconvert --to markdown tutorial_pygmsh.ipynb --output=converted_files/tutorial_pygmsh.md
+	jupyter nbconvert --to python notebooks/tutorial_pygmsh.ipynb --output=../converted_files/tutorial_pygmsh.py
+	jupyter nbconvert --to markdown notebooks/tutorial_pygmsh.ipynb --output=../converted_files/tutorial_pygmsh.md

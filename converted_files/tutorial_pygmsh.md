@@ -2,8 +2,8 @@
 
 In this tutorial, you will learn:
 1. How to create a mesh with mesh markers in pygmsh
-2. How to create 3D meshes with pygmsh (For now see this [discourse reply](https://fenicsproject.discourse.group/t/pygmsh-tutorial/2506/8?u=dokken)
-3. How to create an XDMF-file than can be imported in either dolfin or dolfinx
+2. [How to create 3D meshes with pygmsh](#second)
+3. [How to create an XDMF-file than can be imported in either dolfin or dolfinx](#third)
 4. How to load existing "msh"-files into dolfin and dolfinx
 
 Prerequisites for this tutorial is to install pygmsh[>=6.1.1](https://pypi.org/project/pygmsh/6.1.1/), meshio[>=4.1.1](https://pypi.org/project/meshio/4.1.1/) and gmsh[>=4.6.0](https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64.tgz). All of these dependencies can be found in the docker image
@@ -71,50 +71,116 @@ geometry.add_physical(circle.line_loop.lines, obstacle)
 ```
 
 We generate the mesh using the pygmsh function `generate_mesh`. We add the keyword argument `geo_filename="mesh.geo"` to be able to inspect the mesh in the gmsh GUI, and `prune_z_0=True` to remove the z-coordinate from the mesh.
-To use this mesh in [the third tutorial](#third), one can add `msh_filename="mesh.msh"`
+To use this mesh in [the third tutorial](#third), one can add `msh_filename="mesh.msh"`. The output messages of gmsh has been supressed with `verbose=False`.
 
 
 ```python
 from pygmsh import generate_mesh
 mesh = generate_mesh(
         geometry, prune_z_0=True,
-        geo_filename="mesh.geo", msh_filename="mesh.msh")
+        geo_filename="mesh.geo", msh_filename="mesh.msh", verbose=False)
 ```
 
-    Info    : Running 'gmsh -3 mesh.geo -format msh -bin -o mesh.msh' [Gmsh 4.6.0, 1 node, max. 1 thread]
-    Info    : Started on Sat Sep 12 14:59:11 2020
-    Info    : Reading 'mesh.geo'...
-    Info    : Done reading 'mesh.geo'
-    Info    : Meshing 1D...
-    Info    : [  0%] Meshing curve 1 (Circle)
-    Info    : [ 20%] Meshing curve 2 (Circle)
-    Info    : [ 30%] Meshing curve 3 (Circle)
-    Info    : [ 50%] Meshing curve 6 (Line)
-    Info    : [ 60%] Meshing curve 7 (Line)
-    Info    : [ 80%] Meshing curve 8 (Line)
-    Info    : [ 90%] Meshing curve 9 (Line)
-    Info    : Done meshing 1D (Wall 0.00851607s, CPU 0.008s)
-    Info    : Meshing 2D...
-    Info    : [  0%] Meshing surface 5 (Plane, Frontal-Delaunay)
-    Info    : [ 50%] Meshing surface 11 (Plane, Frontal-Delaunay)
-    Info    : Done meshing 2D (Wall 0.0718801s, CPU 0.068s)
-    Info    : Meshing 3D...
-    Info    : Done meshing 3D (Wall 3.48091e-05s, CPU 0s)
-    Info    : 2699 nodes 5435 elements
-    Info    : Writing 'mesh.msh'...
-    Info    : Done writing 'mesh.msh'
-    Info    : Stopped on Sat Sep 12 14:59:11 2020 (From start: Wall 0.0836709s, CPU 0.124s)
     
     msh file: mesh.msh
     
     geo file: mesh.geo
 
 
-The full script for this code can be downloaded [here](tutorial_pygmsh.py).
-
-## <a name="third"></a>3. How to load existing "msh"-files into dolfin and dolfinx
+The full script for this code can be downloaded [here](../converted_files/tutorial_pygmsh.py).
+## <a name="second"></a>2. How to create a 3D mesh using pygmsh
+To create more advanced meshes, such as 3D geometries, using the OpenCASCADE geometry kernel is recommended.
+We start by importing this kernel, and creating three objects:
+- A box $[0,0,0]\times[1,1,1]$
+- A box $[0.5,0.0.5,1]\times[1,1,2]$
+- A ball from $[0.5,0.5,0.5]$ with radius $0.25$.
 
 
 ```python
-
+import pygmsh.opencascade as opencascade
+char_length = 0.1
+geom = opencascade.Geometry()
+box0 =  geom.add_box([0.0, 0, 0], [1, 1, 1], char_length=char_length)
+box1 =  geom.add_box([0.5, 0.5, 1], [0.5, 0.5, 1], char_length=char_length)
+ball = geom.add_ball([0.5, 0.5, 0.5], 0.25, char_length=char_length)
 ```
+
+In this demo, we would like to make a mesh that is the union of these three objects. 
+In addition, we would like the internal boundary of the sphere to be preserved in the final mesh.
+We will do this by using boolean operations. First we make a `boolean_union` of the two boxes (whose internal boundaries will not be preserved). Then, we use boolean fragments to perserve the outer boundary of the sphere.
+
+
+```python
+union = geom.boolean_union([box0, box1])
+union_minus_ball = geom.boolean_fragments([union],[ball])
+```
+
+To create physical markers for the two regions, we use the `add_physical` function. This function only works nicely if the domain whose boundary should be preserved (the sphere) is fully embedded in the other domain (the union of boxes). For more complex operations, it is recommened to do the tagging of entities in the gmsh GUI.
+
+
+```python
+geom.add_physical(union, 1)
+geom.add_physical(union_minus_ball, 2)
+```
+
+We finally generate the 3D mesh, and save both the geo and  msh file as in the previous example.
+
+
+```python
+mesh3D = generate_mesh(geom, geo_filename="mesh3D.geo", msh_filename="mesh3D.msh",
+                      verbose=False)
+```
+
+    
+    msh file: mesh3D.msh
+    
+    geo file: mesh3D.geo
+
+
+## <a name="third"></a>3. How to load meshes into dolfin and dolfinx
+
+In this part of the tutorial, we will learn how to convert the meshes from the `msh` format or `pygmsh` format, into an `XDMF`-format that  is compatible with `dolfin` and `dolfinx`.
+
+We start by considering the two meshes returned by `pygmsh.generate_mesh`, namely `mesh` and `mesh3d`.
+These meshes contain cell data and possible facet data, which has to be separated to be used in dolfin/dolfinx. 
+We separate this with the following convience function
+
+
+```python
+import numpy
+import meshio
+def create_mesh(mesh, cell_type):
+    cells = numpy.vstack([cell.data for cell in mesh.cells if cell.type==cell_type])
+    data = numpy.hstack([mesh.cell_data_dict["gmsh:physical"][key]
+                           for key in mesh.cell_data_dict["gmsh:physical"].keys() if key==cell_type])
+    mesh = meshio.Mesh(points=mesh.points, cells={cell_type: cells},
+                               cell_data={"name_to_read":[data]})
+    return mesh
+```
+
+Next we use this function on the 2D meshes, and write them to file as `mesh2D.xdmf` and `mf2D.xdmf`
+
+
+```python
+triangle_mesh = create_mesh(mesh, "triangle")
+facet_mesh = create_mesh(mesh, "line")
+meshio.write("mesh2D.xdmf", triangle_mesh)
+meshio.write("mf2D.xdmf", facet_mesh)
+```
+
+These XDMF-files  can be visualized in Paraview and looks like
+
+![The 2D mesh and the corresponding facet data visualized in Paraview](../assets/img/mesh2D.png)
+
+The same strategy can be used on general `msh`-files, as shown below
+
+
+```python
+mesh3D_from_msh = meshio.read("mesh3D.msh")
+tetra_mesh = create_mesh(mesh3D_from_msh, "tetra")
+meshio.write("mesh3D_from_msh.xdmf", tetra_mesh)
+```
+
+The 3D mesh can also be visualized in Paraview
+
+![3D mesh with cell markers in Paraview](../assets/img/mesh3D.png)

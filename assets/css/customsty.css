@@ -148,3 +148,8 @@ a:hover {
   width: unset;
   max-width:  750px
 }
+
+.language-plaintext .highlight, .language-plaintext code  {
+  background-color: grey!important;
+
+}

@@ -2,3 +2,7 @@ Gemfile.lock
 .*.swp
 _site
 _site/*
+*.geo
+*.xdmf
+*.h5
+*.msh
