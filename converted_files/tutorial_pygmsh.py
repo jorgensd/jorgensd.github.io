@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # PYGMSH with DOLFIN and DOLFIN-X
+# # Mesh generation and conversion for DOLFIN and DOLFIN-X
 
 # In this tutorial, you will learn:
-# 1. How to create a mesh with mesh markers in pygmsh
+# 1. [How to create a mesh with mesh markers in pygmsh](#first)
 # 2. [How to create 3D meshes with pygmsh](#second)
 # 3. [How to create an XDMF-file than can be imported in either dolfin or dolfinx](#third)
-# 4. How to load existing "msh"-files into dolfin and dolfinx
+# 
 # 
 # Prerequisites for this tutorial is to install pygmsh[>=6.1.1](https://pypi.org/project/pygmsh/6.1.1/), meshio[>=4.1.1](https://pypi.org/project/meshio/4.1.1/) and gmsh[>=4.6.0](https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64.tgz). All of these dependencies can be found in the docker image
 # `dolfinx/dev-env`, which can be ran on any computer with docker using
 # ```bash
 # docker run -ti -v $(pwd):/home/shared -w /home/shared --rm dolfinx/dev-env
 # ```
-# ## 1. How to create a mesh with pygmsh
+# ## <a name="first"></a> 1. How to create a mesh with pygmsh
 # In this tutorial, we will learn how to create a channel with a circular obstacle, as used in the [DFG-2D 2 Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_benchmark2_re100.html).
 # 
 # To do this, we use pygmsh.
@@ -186,3 +186,5 @@ meshio.write("mesh3D_from_msh.xdmf", tetra_mesh)
 # The 3D mesh can also be visualized in Paraview
 # 
 # ![3D mesh with cell markers in Paraview](../assets/img/mesh3D.png)
+
+# In the next tutorial, you will learn how to use these XDMF-files in dolfin and dolfinx (To be released)
