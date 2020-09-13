@@ -191,9 +191,3 @@ meshio.write("mesh3D_from_msh.xdmf", tetra_mesh)
 # ![3D mesh with cell markers in Paraview](../assets/img/mesh3D.png)
 
 # In the next tutorial, you will learn how to use these XDMF-files in dolfin and dolfinx (To be released)
-
-# In[1]:
-
-
-assert(False)
-

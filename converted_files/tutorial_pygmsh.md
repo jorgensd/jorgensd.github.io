@@ -189,20 +189,3 @@ The 3D mesh can also be visualized in Paraview
 ![3D mesh with cell markers in Paraview](../assets/img/mesh3D.png)
 
 In the next tutorial, you will learn how to use these XDMF-files in dolfin and dolfinx (To be released)
-
-
-```python
-assert(False)
-```
-
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-1-1ba3107872f2> in <module>
-    ----> 1 asssert(False)
-    
-
-    NameError: name 'asssert' is not defined
-
