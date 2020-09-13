@@ -15,7 +15,8 @@ jobs:
   # This workflow contains a single job called "build"
   test-dolfinx:
     # The type of runner that the job will run on
-    runs-on: dolfinx/dolfinx
+    runs-on: ubuntu-20.04
+    container: dolfinx/dolfinx
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
