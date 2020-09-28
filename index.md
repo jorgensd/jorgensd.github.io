@@ -10,11 +10,7 @@ Welcome to my personal web-page. Here you can find information about me, and the
 
 # About me
 
-<figure class="image" style="float:left;padding-right:10px;width:300px">
-  <img src="https://s0.geograph.org.uk/geophotos/05/02/43/5024302_a15fb90d.jpg" style="width:300px" alt="Cambridge Engineering Department">
-  <figcaption style="width:300px">  © Copyright <a title="View profile" href="/profile/3101" xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName" rel="cc:attributionURL dct:creator">N Chadwick</a> and
-licensed for <a href="/reuse.php?id=5024302" itemprop="acquireLicensePage">reuse</a> under this <a rel="license" itemprop="license" href="http://creativecommons.org/licenses/by-sa/2.0/" class="nowrap" about="https://s0.geograph.org.uk/geophotos/05/02/43/5024302_a15fb90d.jpg" title="Creative Commons Attribution-Share Alike 2.0 Licence">Creative Commons Licence</a>.</figcaption>
-</figure>
+![Cambridge Engineering Department](assets/img/camb.jpg){: .image-right }
 
 I am currently a Postdoctoral Research Associate at the University of Cambridge, working on the ASiMoV project, working with [Chris Richardson](http://www.bpi.cam.ac.uk/user/chris) and [Garth Wells](http://www3.eng.cam.ac.uk/~gnw20/) on the [ASiMoV](https://gow.epsrc.ukri.org/NGBOViewGrant.aspx?GrantRef=EP/S005072/1)-project. The main goal of this projecct is to do the worlds first, high fidelity simulation of a complete gas-turbine engine during operation, simultaneously including the effects of thermo-mechanics, electromagnetics, and CFD.
 
