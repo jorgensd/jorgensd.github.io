@@ -9,11 +9,11 @@ website:
 
 
 start-notebook:
-	docker run -v $(PWD):/root/shared -w "/root/shared" --rm -p 8888:8888 pygmsh-lab:latest
+	docker run -v $(pwd):/root/shared -w "/root/shared" --rm -p 8888:8888 pygmsh-lab:latest
 
 
 start-container:
-	docker run -v $(PWD):/root/shared -ti -w "/root/shared" --rm pygmsh-env:latest
+	docker run -v $(pwd):/root/shared -ti -w "/root/shared" --rm pygmsh-env:latest
 
 convert:
 	jupyter nbconvert --to python notebooks/tutorial_pygmsh.ipynb --output=../converted_files/tutorial_pygmsh.py

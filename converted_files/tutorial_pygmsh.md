@@ -9,10 +9,16 @@ This tutorial can be downloaded as a [Python-file](../converted_files/tutorial_p
 
 Prerequisites for this tutorial is to install pygmsh[==6.1.1](https://pypi.org/project/pygmsh/6.1.1/), meshio [==4.1.1](https://pypi.org/project/meshio/4.1.1/) and gmsh[>=4.6.0](https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64.tgz). All of these dependencies can be found in the docker image
 `dokken92/pygmsh-6.6.1`, which can be ran on any computer with docker using 
+
 ```bash
-docker run -v $(PWD):/root/shared -w "/root/shared" --rm -p 8888:8888 dokken92/pygmsh-6.6.1
+docker run -v $(pwd):/root/shared -ti -w "/root/shared" --rm dokken92/pygmsh-6.6.1:pygmsh-env
 ```
-which spawns a jupyter notebook that can be opened in your browser.
+
+To start a jupyter notebook with pygmsh and meshio installed, run
+
+```bash
+docker run -v $(pwd):/root/shared -w "/root/shared" --rm -p 8888:8888 dokken92/pygmsh-6.6.1:pygmsh-lab
+```
 
 ## <a name="first"></a> 1. How to create a mesh with pygmsh
 In this tutorial, we will learn how to create a channel with a circular obstacle, as used in the [DFG-2D 2 Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_benchmark2_re100.html).
