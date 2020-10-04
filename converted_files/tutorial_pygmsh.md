@@ -1,4 +1,4 @@
-# Mesh generation and conversion for DOLFIN and DOLFIN-X
+# Mesh generation and conversion with GMSH 4.6.0 and PYGMSH 6.1.1
 
 In this tutorial, you will learn:
 1. [How to create a mesh with mesh markers in pygmsh](#first)
@@ -7,16 +7,15 @@ In this tutorial, you will learn:
 
 This tutorial can be downloaded as a [Python-file](../converted_files/tutorial_pygmsh.py) or as a [Jupyter notebook](../notebooks/tutorial_pygmsh.ipynb)
 
-Prerequisites for this tutorial is to install pygmsh[>=6.1.1](https://pypi.org/project/pygmsh/6.1.1/), meshio[>=4.1.1](https://pypi.org/project/meshio/4.1.1/) and gmsh[>=4.6.0](https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64.tgz). All of these dependencies can be found in the docker image
-`dolfinx/dev-env`, which can be ran on any computer with docker using
+Prerequisites for this tutorial is to install pygmsh[==6.1.1](https://pypi.org/project/pygmsh/6.1.1/), meshio [==4.1.1](https://pypi.org/project/meshio/4.1.1/) and gmsh[>=4.6.0](https://gmsh.info/bin/Linux/gmsh-4.6.0-Linux64.tgz). All of these dependencies can be found in the docker image
+`dokken92/pygmsh-6.6.1`, which can be ran on any computer with docker using 
 ```bash
-docker run -ti -v $(pwd):/home/shared -w /home/shared --rm dolfinx/dev-env
+docker run -v $(PWD):/root/shared -w "/root/shared" --rm -p 8888:8888 dokken92/pygmsh-6.6.1
 ```
+which spawns a jupyter notebook that can be opened in your browser.
+
 ## <a name="first"></a> 1. How to create a mesh with pygmsh
 In this tutorial, we will learn how to create a channel with a circular obstacle, as used in the [DFG-2D 2 Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_benchmark2_re100.html).
-
-
-
 
 To do this, we use pygmsh.
 First we create an empty geometry and the circular obstacle:
@@ -35,6 +34,7 @@ r = 0.05
 # Initialize empty geometry and create circular object
 geometry = Geometry()
 circle = geometry.add_circle(c, r, lcar=resolution)
+
 ```
 
 The next step is to create the channel with the circle as a hole.
