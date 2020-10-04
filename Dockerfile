@@ -22,6 +22,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     libhdf5-${MPI}-dev \
     lib${MPI}-dev \
     pkg-config \
+	libxft2 \
     python3-pip &&\
 	    apt-get -y install \
     doxygen \
