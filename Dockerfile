@@ -54,6 +54,7 @@ RUN cd /usr/local && \
     rm gmsh-${GMSH_VERSION}-Linux64-sdk.tgz
 
 # Add GMSH to pytho API
+ENV PATH=/usr/local/gmsh-${GMSH_VERSION}-Linux64-sdk/bin:$PATH
 ENV PYTHONPATH=/usr/local/gmsh-${GMSH_VERSION}-Linux64-sdk/lib:$PYTHONPATH
 
 WORKDIR /root
