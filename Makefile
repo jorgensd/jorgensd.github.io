@@ -9,9 +9,16 @@ website:
 
 
 start-notebook:
-	docker run -v "$(CURDIR):/root/shared" --rm -p 8888:8888 dolfinx/lab
+	docker run -v $(PWD):/root/shared -w "/root/shared" --rm -p 8888:8888 pygmsh-lab:latest
 
+
+start-container:
+	docker run -v $(PWD):/root/shared -ti -w "/root/shared" --rm pygmsh-env:latest
 
 convert:
 	jupyter nbconvert --to python notebooks/tutorial_pygmsh.ipynb --output=../converted_files/tutorial_pygmsh.py
 	jupyter nbconvert --to markdown notebooks/tutorial_pygmsh.ipynb --output=../converted_files/tutorial_pygmsh.md
+
+build-docker:
+	docker build . -t pygmsh-env --target pygmsh-env
+	docker build . -t pygmsh-lab --target pygmsh-lab

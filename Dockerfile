@@ -3,7 +3,7 @@
 # Authors:
 # Jørgen S. Dokken <dokken92@gmail.com>
 
-FROM ubuntu:20.04 as core-env
+FROM ubuntu:20.04 as pygmsh-env
 
 WORKDIR /tmp
 
@@ -46,6 +46,7 @@ RUN export HDF5_MPI="ON" && \
 	pip3 install mpi4py && \
     pip3 install --no-cache-dir --no-binary=h5py h5py meshio==4.1.1 pygmsh==6.1.1
 
+RUN pip3 install ipython
 # Download Install Gmsh SDK
 RUN cd /usr/local && \
     wget -nc --quiet http://gmsh.info/bin/Linux/gmsh-${GMSH_VERSION}-Linux64-sdk.tgz && \
@@ -55,15 +56,12 @@ RUN cd /usr/local && \
 # Add GMSH to pytho API
 ENV PYTHONPATH=/usr/local/gmsh-${GMSH_VERSION}-Linux64-sdk/lib:$PYTHONPATH
 
+WORKDIR /root
 
-FROM core-env as pygmsh-env
-LABEL description="Ubuntu 20.04 environment with GMSH and pygmsh"
-
-
-FROM core-env as pygmsh-lab
+FROM pygmsh-env as pygmsh-lab
 LABEL description="GMSH and PYGMSH with ubuntu 20.04 in Jupyter Lab"
 
-WORKDIR /root
+RUN mkdir -p shared
 
 RUN pip3 install --upgrade --no-cache-dir jupyter jupyterlab
 EXPOSE 8888/tcp
