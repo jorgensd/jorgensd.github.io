@@ -21,4 +21,6 @@ convert:
 
 build-docker:
 	docker build . -t pygmsh-env --target pygmsh-env
+	cd lab
 	docker build . -t pygmsh-lab --target pygmsh-lab
+	cd ..

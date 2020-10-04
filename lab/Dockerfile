@@ -1,4 +1,3 @@
-FROM ubuntu:20.04 as pygmsh-lab
 # This is a Dockerfile used to install dependecies for my webpage
 #
 # Authors:
