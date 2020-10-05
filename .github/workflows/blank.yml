@@ -33,7 +33,6 @@ jobs:
       #     echo Add other actions to build,
       #     echo test, and deploy your project.
 
-jobs:
   test-gmsh:
     runs-on: ubuntu-20.04
     container: dolfinx/lab
