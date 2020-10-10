@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # # Using the GMSH Python API to generate complex meshes
-# In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `dokken92/pygmsh-6.1.1` docker images, as described in the [pygmsh tutorial](converted_files/tutorial_pygmsh.md). For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupter-lab image with `dolfinx/lab` and a normal docker image with `dolfinx/dolfinx`.
+# In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `dokken92/pygmsh-6.1.1` docker images, as described in the [pygmsh tutorial](converted_files/tutorial_pygmsh.md). For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab` and a normal docker image with `dolfinx/dolfinx`.
 # 
 # This tutorial can be downloaded as a [Python-file](../converted_files/tutorial_gmsh.py) or as a [Jupyter notebook](../notebooks/tutorial_gmsh.ipynb).
 
