@@ -287,39 +287,9 @@ The `read_from_msh` function also handles MPI communication and gmsh initializat
 
 ```python
 gmsh.finalize()
+gmsh.initialize()
 gmsh.model.add("Mesh from file")
 gmsh.merge("mesh3D.msh")
 output = gmsh_model_to_mesh(gmsh.model, cell_data=True, facet_data=True, gdim=3)
 gmsh.finalize()
 ```
-
-
-    ---------------------------------------------------------------------------
-
-    AssertionError                            Traceback (most recent call last)
-
-    <ipython-input-22-26ae6d0f6005> in <module>
-          1 gmsh.model.add("Mesh from file")
-          2 gmsh.merge("mesh3D.msh")
-    ----> 3 output = gmsh_model_to_mesh(gmsh.model, cell_data=True, facet_data=True, gdim=3)
-          4 gmsh.finalize()
-
-
-    ~/shared/notebooks/gmsh_helpers.py in gmsh_model_to_mesh(model, cell_data, facet_data, gdim)
-         65     if MPI.COMM_WORLD.rank == 0:
-         66         # Get mesh geometry
-    ---> 67         x = extract_gmsh_geometry(model)
-         68 
-         69         # Get mesh topology for each element
-
-
-    /usr/local/dolfinx-real/lib/python3.8/dist-packages/dolfinx/io.py in extract_gmsh_geometry(gmsh_model, model_name)
-        141     # Sort nodes in geometry according to the unique index
-        142     perm_sort = numpy.argsort(indices)
-    --> 143     assert numpy.all(indices[perm_sort] == numpy.arange(len(indices)))
-        144     return points[perm_sort]
-        145 
-
-
-    AssertionError: 
-

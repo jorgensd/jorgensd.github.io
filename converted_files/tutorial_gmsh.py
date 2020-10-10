@@ -311,6 +311,7 @@ mesh, cell_tags, facet_tags = read_from_msh("mesh3D.msh", cell_data=True, facet_
 
 
 gmsh.finalize()
+gmsh.initialize()
 gmsh.model.add("Mesh from file")
 gmsh.merge("mesh3D.msh")
 output = gmsh_model_to_mesh(gmsh.model, cell_data=True, facet_data=True, gdim=3)
