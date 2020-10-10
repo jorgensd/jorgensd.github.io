@@ -12,6 +12,8 @@
 # In[1]:
 
 
+import warnings
+warnings.filterwarnings("ignore")
 import gmsh
 gmsh.initialize()
 
@@ -54,7 +56,6 @@ fluid = gmsh.model.occ.cut([(3, channel)], [(3, cylinder)])
 gmsh.model.occ.synchronize()
 volumes = gmsh.model.getEntities(dim=3)
 assert(volumes == fluid[0])
-print(volumes)
 fluid_marker = 11
 gmsh.model.addPhysicalGroup(volumes[0][0], [volumes[0][1]], fluid_marker)
 gmsh.model.setPhysicalName(volumes[0][0], fluid_marker, "Fluid volume")
@@ -164,10 +165,154 @@ gmsh.write("mesh3D.msh")
 # The mesh can be visualized in the GMSH GUI. The figure above visualized the marked facets of the 3D geometry.
 # ![Facets of the 3D mesh visualized in GMSH](../assets/img/tutorial_gmsh.png)
 
-# In the next tutorials, we will learn two diffferent methods of loading this mesh into dolfin-X
+# In the next tutorials, we will learn two diffferent methods of loading this mesh into [dolfin-X](https://github.com/FEniCS/dolfinx/)
 
 # ## <a name="second"></a> 2. How to load this mesh into dolfin-X without IO
-# To be released
+# In his tutorial, we will go through the steps of how to load the gmsh geometry above into dolfin-X, without using an
+# intermediate file for storing mesh data.
+
+# ### Stort tutorial
+# Download [gmsh_helpers.py](gmsh_helpers.py), and run the following
+
+# In[13]:
+
+
+from gmsh_helpers import gmsh_model_to_mesh
+mesh, cell_tags, facet_tags = gmsh_model_to_mesh(gmsh.model, cell_data=True, facet_data=True, gdim=3)
+
+
+# This function creates a mesh on processor 0 with GMSH and distributes the mesh data in a `dolfinx.Mesh` for parallel usage. The flags `cell_data` and `facet_data` are booleans that indicates that you would like to extract cell and facet markers from the gmsh model. The last flag `gdim` indicates the geometrical dimension of your mesh, and should be set to `2` if you want to have a 2D geometry.
+# ### Long tutorial
+# If you want to learn what the `gmsh_model_to_mesh` function is actualy doing, the rest of this section will go through it step by step. Note that the long tutorial assumes that you are running in serial, and does therefore not require the MPI-communication found in `gmsh_model_to_mesh`.
+# We start by using some convenience functions from dolfin-x to extract the mesh geometry (the nodes of the mesh) and the mesh topology (the cell connectivities) for the mesh.
+
+# In[14]:
+
+
+from dolfinx.io import extract_gmsh_geometry, extract_gmsh_topology_and_markers 
+
+
+# In[15]:
+
+
+x = extract_gmsh_geometry(gmsh.model)
+topologies = extract_gmsh_topology_and_markers(gmsh.model)
+
+
+# The mesh geometry is a (number of points, 3) array of all the coordinates of the nodes in the mesh. The topologies is a dictionary, where the key is the unique [GMSH cell identifier](http://gmsh.info//doc/texinfo/gmsh.html#MSH-file-format). For each cell type, there is a sub-dictionary containing the mesh topology, an array (number_of_cells, number_of_nodes_per_cell) array containing an integer referring to a row (coordinate) in the mesh geometry, and a 1D array (cell_data) with mesh markers for each cell in the topology.
+# 
+# As an MSH-file can contain meshes for multiple topological dimensions (0=vertices, 1=lines, 2=surfaces, 3=volumes), we have to determine which of the cells has to highest topological dimension. We do this with the following snippet
+
+# In[16]:
+
+
+import numpy
+# Get information about each cell type from the msh files
+num_cell_types = len(topologies.keys())
+cell_information = {}
+cell_dimensions = numpy.zeros(num_cell_types, dtype=numpy.int32)
+for i, element in enumerate(topologies.keys()):
+    properties = gmsh.model.mesh.getElementProperties(element)
+    name, dim, order, num_nodes, local_coords, _ = properties
+    cell_information[i] = {"id": element, "dim": dim,
+                           "num_nodes": num_nodes}
+    cell_dimensions[i] = dim
+
+# Sort elements by ascending dimension
+perm_sort = numpy.argsort(cell_dimensions)
+
+
+# We extract the topology of the cell with the highest topological dimension from `topologies`, and create the corresponding `ufl.domain.Mesh` for the given celltype
+
+# In[17]:
+
+
+from dolfinx.io import ufl_mesh_from_gmsh
+cell_id = cell_information[perm_sort[-1]]["id"]
+cells = topologies[cell_id]["topology"]
+ufl_domain = ufl_mesh_from_gmsh(cell_id, 3)
+
+
+# As the GMSH model has the cell topology ordered as specified in the  [MSH format](http://gmsh.info//doc/texinfo/gmsh.html#Node-ordering),
+# we have to permute the topology to the [FIAT format](https://github.com/FEniCS/dolfinx/blob/e7f0a504e6ff538ad9992d8be73f74f53b630d11/cpp/dolfinx/io/cells.h#L16-L77). The permuation is done using the `perm_gmsh` function from dolfin-X.
+
+# In[18]:
+
+
+from dolfinx.cpp.io import perm_gmsh
+from dolfinx.cpp.mesh import to_type
+num_nodes = cell_information[perm_sort[-1]]["num_nodes"]
+gmsh_cell_perm = perm_gmsh(to_type(str(ufl_domain.ufl_cell())), num_nodes)
+cells = cells[:, gmsh_cell_perm]
+
+
+# The final step is to create the mesh from the topology and geometry
+
+# In[19]:
+
+
+from dolfinx.mesh import create_mesh
+from mpi4py import MPI
+mesh = create_mesh(MPI.COMM_WORLD, cells, x, ufl_domain)
+# NOTE: Add plotting when https://github.com/FEniCS/dolfinx/pull/1158 is merged
+# from dolfinx.plotting import plot
+# plot(mesh)
+
+
+# As the meshes can contain markers for the cells or any sub entity, the next snippets show how to extract this info to GMSH into `dolfinx.MeshTags`.
+
+# In[20]:
+
+
+from dolfinx.cpp.io import extract_local_entities
+from dolfinx.cpp.graph import AdjacencyList_int32
+from dolfinx.cpp.mesh import cell_entity_type
+from dolfinx.mesh import create_meshtags
+# Create MeshTags for cell data
+cell_values = topologies[cell_id]["cell_data"]
+local_entities, local_values = extract_local_entities(mesh, mesh.topology.dim, cells, cell_values)
+mesh.topology.create_connectivity(mesh.topology.dim, 0)
+adj = AdjacencyList_int32(local_entities)
+ct = create_meshtags(mesh, mesh.topology.dim, adj, numpy.int32(local_values))
+ct.name = "Cell tags"
+
+# Create MeshTags for facets
+# Permute facets from MSH to Dolfin-X ordering
+facet_type = cell_entity_type(to_type(str(ufl_domain.ufl_cell())), mesh.topology.dim - 1)
+gmsh_facet_id = cell_information[perm_sort[-2]]["id"]
+num_facet_nodes = cell_information[perm_sort[-2]]["num_nodes"]
+gmsh_facet_perm = perm_gmsh(facet_type, num_facet_nodes)
+marked_facets = topologies[gmsh_facet_id]["topology"]
+facet_values = topologies[gmsh_facet_id]["cell_data"]
+marked_facets = marked_facets[:, gmsh_facet_perm]
+local_entities, local_values = extract_local_entities(mesh, mesh.topology.dim - 1, marked_facets, facet_values)
+mesh.topology.create_connectivity(mesh.topology.dim - 1, mesh.topology.dim)
+adj = AdjacencyList_int32(local_entities)
+ft = create_meshtags(mesh, mesh.topology.dim - 1,adj, numpy.int32(local_values))
+ft.name = "Facet tags"
+
 
 # ## <a name="third"></a> 3. How to load msh files into dolfin-X
-# To be released
+# In the previous tutorial, we learnt how to load a gmsh python model into dolfin-X. In this section, we will learn how to load an "msh" file into dolfin-X.
+# We will do this by using the `gmsh_model_to_mesh` function explained in detail in the previous section.
+# We load the `read_from_msh`-function from [gmsh_helpers.py](gmsh_helpers.py) and use it in the following way
+
+# In[21]:
+
+
+from gmsh_helpers import read_from_msh
+mesh, cell_tags, facet_tags = read_from_msh("mesh3D.msh", cell_data=True, facet_data=True, gdim=3)
+
+
+# What this function does, is that it uses the `gmsh.merge` command to create a gmsh model of the msh file and then in turn calls the `gmsh_model_to_mesh` function.
+# The `read_from_msh` function also handles MPI communication and gmsh initialization/finalization.
+
+# In[22]:
+
+
+gmsh.finalize()
+gmsh.model.add("Mesh from file")
+gmsh.merge("mesh3D.msh")
+output = gmsh_model_to_mesh(gmsh.model, cell_data=True, facet_data=True, gdim=3)
+gmsh.finalize()
+
