@@ -2,8 +2,8 @@
 
 In this tutorial, you will learn:
 1. [How to create a mesh with mesh markers in pygmsh](#first)
-2. [How to convert your mesh to XDMF]
-3. [How to create 3D meshes with pygmsh](#second)
+2. [How to convert your mesh to XDMF](#second)
+3. [How to create 3D meshes with pygmsh](#third)
 
 This tutorial can be downloaded as a [Python-file](../converted_files/tutorial_pygmsh.py) or as a [Jupyter notebook](../notebooks/tutorial_pygmsh.ipynb)
 
@@ -87,7 +87,7 @@ gmsh.clear()
 geometry.__exit__()
 ```
 
-## 2. How to convert your mesh to XDMF
+##<a name="second"></a>2. How to convert your mesh to XDMF
 Now that we have save the mesh to a `msh` file, we would like to convert it to a format that interfaces with dolfin and dolfin-X. 
 For this I suggest using the `XDMF`-format as it supports parallel IO.
 
@@ -126,7 +126,7 @@ triangle_mesh = create_mesh(mesh_from_file, "triangle", prune_z=True)
 meshio.write("mesh.xdmf", triangle_mesh)
 ```
 
-## <a name="third"></a>2. How to create a 3D mesh using pygmsh
+## <a name="third"></a>3. How to create a 3D mesh using pygmsh
 To create more advanced meshes, such as 3D geometries, using the OpenCASCADE geometry kernel is recommended.
 We start by importing this kernel, and creating three objects:
 - A box $[0,0,0]\times[1,1,1]$
