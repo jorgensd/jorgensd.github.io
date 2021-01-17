@@ -3,6 +3,8 @@
 Welcome to my personal web-page. Here you can find information about me, and the projects I have been working on during my post-graduate studies.
 
 # Latest news
+- An initial version of the [dolfinx tutorial](https://jorgensd.github.io/dolfinx-tutorial/) is available online. 
+- The [Pygmsh tutorial](converted_files/tutorial_pygmsh.md)  has been updated to use the latest release.
 - A tutorial for usage of of the GMSH API has been added to the [Tutorial pages](converted_files/tutorial_gmsh.md).
 - Simple Taylor-Green solver and [3D Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html) IPCS Navier-Stokes solver for [dolfinx](https://github.com/FEniCS/dolfinx/) is available at [jorgensd/dokken_ipcs](https://github.com/jorgensd/dolfinx_ipcs) on Github!
 
