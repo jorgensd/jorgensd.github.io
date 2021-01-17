@@ -87,7 +87,7 @@ gmsh.clear()
 geometry.__exit__()
 ```
 
-##<a name="second"></a>2. How to convert your mesh to XDMF
+## <a name="second"></a>2. How to convert your mesh to XDMF
 Now that we have save the mesh to a `msh` file, we would like to convert it to a format that interfaces with dolfin and dolfin-X. 
 For this I suggest using the `XDMF`-format as it supports parallel IO.
 

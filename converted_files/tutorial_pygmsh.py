@@ -23,7 +23,7 @@
 # To do this, we use pygmsh.
 # First we create an empty geometry and the circular obstacle:
 
-# In[5]:
+# In[1]:
 
 
 import pygmsh
@@ -45,7 +45,7 @@ circle = model.add_circle(c, r, mesh_size=resolution)
 
 # The next step is to create the channel with the circle as a hole.
 
-# In[7]:
+# In[2]:
 
 
 # Add points with finer resolution on left side
@@ -70,7 +70,7 @@ model.synchronize()
 # The final step before mesh generation is to mark the different boundaries and the volume mesh. Note that with pygmsh, boundaries with the same tag has to be added simultaneously. In this example this means that we have to add the top and 
 #  bottom wall in one function call. 
 
-# In[9]:
+# In[3]:
 
 
 volume_marker = 6
@@ -83,7 +83,7 @@ model.add_physical(circle.curve_loop.curves, "Obstacle")
 
 # We generate the mesh using the pygmsh function `generate_mesh`. Generate mesh returns a `meshio.Mesh`. However, this mesh is tricky to extract physical tags from. Therefore we write the mesh to file using the `gmsh.write` function.
 
-# In[11]:
+# In[4]:
 
 
 geometry.generate_mesh(dim=2)
@@ -93,11 +93,11 @@ gmsh.clear()
 geometry.__exit__()
 
 
-# ##<a name="second"></a>2. How to convert your mesh to XDMF
+# ## <a name="second"></a>2. How to convert your mesh to XDMF
 # Now that we have save the mesh to a `msh` file, we would like to convert it to a format that interfaces with dolfin and dolfin-X. 
 # For this I suggest using the `XDMF`-format as it supports parallel IO.
 
-# In[13]:
+# In[5]:
 
 
 import meshio
@@ -106,7 +106,7 @@ mesh_from_file = meshio.read("mesh.msh")
 
 # Now that we have loaded the mesh, we need to extract the cells and physical data. We need to create a separate file for the facets (lines), which we will use when we define boundary conditions in dolfin/dolfin-X. We do this with the following convenient function. Note that as we would like a 2 dimensional mesh, we need to remove the z-values in the mesh coordinates.
 
-# In[15]:
+# In[6]:
 
 
 import numpy
@@ -125,7 +125,7 @@ def create_mesh(mesh, cell_type, prune_z=False):
 
 # With this function at hand, we can save the meshes to `XDMF`.
 
-# In[17]:
+# In[7]:
 
 
 line_mesh = create_mesh(mesh_from_file, "line", prune_z=True)
@@ -142,7 +142,7 @@ meshio.write("mesh.xdmf", triangle_mesh)
 # - A box $[0.5,0.0.5,1]\times[1,1,2]$
 # - A ball from $[0.5,0.5,0.5]$ with radius $0.25$.
 
-# In[19]:
+# In[8]:
 
 
 # Clear previous model
@@ -158,7 +158,7 @@ ball = model3D.add_ball([0.5, 0.5, 0.5], 0.25)
 # In addition, we would like the internal boundary of the sphere to be preserved in the final mesh.
 # We will do this by using boolean operations. First we make a `boolean_union` of the two boxes (whose internal boundaries will not be preserved). Then, we use boolean fragments to perserve the outer boundary of the sphere.
 
-# In[21]:
+# In[9]:
 
 
 union = model3D.boolean_union([box0, box1])
@@ -168,7 +168,7 @@ model3D.synchronize()
 
 # To create physical markers for the two regions, we use the `add_physical` function. This function only works nicely if the domain whose boundary should be preserved (the sphere) is fully embedded in the other domain (the union of boxes). For more complex operations, it is recommened to do the tagging of entities in the gmsh GUI, as explained in the [GMSH tutorial](converted_files/tutorial_gmsh.md).
 
-# In[22]:
+# In[10]:
 
 
 model3D.add_physical(union, "Union")
@@ -177,7 +177,7 @@ model3D.add_physical(union_minus_ball, "Union minus ball")
 
 # We finally generate the 3D mesh, and save both the geo and  msh file as in the previous example.
 
-# In[23]:
+# In[11]:
 
 
 geom.generate_mesh(dim=3)
@@ -191,7 +191,7 @@ model3D.__exit__()
 # 
 # We use the same strategy for the 3D mesh as the 2D mesh.
 
-# In[24]:
+# In[12]:
 
 
 mesh3D_from_msh = meshio.read("mesh3D.msh")
