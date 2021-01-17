@@ -7,7 +7,6 @@ FROM ubuntu:20.04 as pygmsh-env
 
 WORKDIR /tmp
 
-ARG GMSH_VERSION=4.6.0
 ARG MPI="mpich"
 ARG MAKEFLAGS
 
@@ -34,28 +33,23 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get -y install \
     libglu1 \
     libxcursor-dev \
-    libxinerama1 && \
+    libxinerama1 \
+    libxft2 && \
     apt-get -y install \
     python3-lxml && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
 # Meshio python deps via pip
-RUN export HDF5_MPI="ON" && \
-    export CC=mpicc && \
-	pip3 install mpi4py && \
-    pip3 install --no-cache-dir --no-binary=h5py h5py meshio==4.1.1 pygmsh==6.1.1
+RUN pip3 install mpi4py pygmsh && \
+    pip3 install gmsh --user
+RUN export export HDF5_MPI="ON" && \
+    export HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/" && \
+    export CC=mpicc && \ 
+    pip3 install --no-cache-dir --no-binary=h5py h5py meshio 
 
 RUN pip3 install ipython
-# Download Install Gmsh SDK
-RUN cd /usr/local && \
-    wget -nc --quiet http://gmsh.info/bin/Linux/gmsh-${GMSH_VERSION}-Linux64-sdk.tgz && \
-    tar -xf gmsh-${GMSH_VERSION}-Linux64-sdk.tgz && \
-    rm gmsh-${GMSH_VERSION}-Linux64-sdk.tgz
 
-# Add GMSH to pytho API
-ENV PATH=/usr/local/gmsh-${GMSH_VERSION}-Linux64-sdk/bin:$PATH
-ENV PYTHONPATH=/usr/local/gmsh-${GMSH_VERSION}-Linux64-sdk/lib:$PYTHONPATH
+ENV PATH=$PATH:/root/.local/bin
 
 WORKDIR /root
