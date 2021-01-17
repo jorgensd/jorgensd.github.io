@@ -51,5 +51,5 @@ RUN export export HDF5_MPI="ON" && \
 RUN pip3 install ipython
 
 ENV PATH=$PATH:/root/.local/bin
-
+ENV PYTHONPATH=$PYTHONPATH:/root/.local/lib/python3.8/site-packages/gmsh-4.7.1-Linux64-sdk/lib/
 WORKDIR /root
