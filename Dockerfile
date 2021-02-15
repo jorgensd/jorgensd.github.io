@@ -41,8 +41,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Meshio python deps via pip
-RUN pip3 install mpi4py pygmsh && \
-    pip3 install gmsh --user
+RUN pip3 install mpi4py && \
+    pip3 install pygmsh gmsh --user
 RUN export export HDF5_MPI="ON" && \
     export HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/" && \
     export CC=mpicc && \ 
