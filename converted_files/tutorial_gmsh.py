@@ -248,15 +248,12 @@ cells = cells[:, gmsh_cell_perm]
 
 # The final step is to create the mesh from the topology and geometry
 
-# In[19]:
+# In[23]:
 
 
 from dolfinx.mesh import create_mesh
 from mpi4py import MPI
 mesh = create_mesh(MPI.COMM_WORLD, cells, x, ufl_domain)
-# NOTE: Add plotting when https://github.com/FEniCS/dolfinx/pull/1158 is merged
-# from dolfinx.plotting import plot
-# plot(mesh)
 
 
 # As the meshes can contain markers for the cells or any sub entity, the next snippets show how to extract this info to GMSH into `dolfinx.MeshTags`.
