@@ -40,16 +40,16 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Meshio python deps via pip
-RUN pip3 install mpi4py && \
-    pip3 install pygmsh gmsh --user
+
 RUN export export HDF5_MPI="ON" && \
     export HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/" && \
     export CC=mpicc && \ 
     pip3 install --no-cache-dir --no-binary=h5py h5py meshio 
 
-RUN pip3 install ipython
+# Meshio python deps via pip
+RUN pip3 install pygmsh mpi4py && \
+    pip3 install gmsh --user
 
 ENV PATH=$PATH:/root/.local/bin
-ENV PYTHONPATH=$PYTHONPATH:/root/.local/lib/python3.8/site-packages/gmsh-4.7.1-Linux64-sdk/lib/
+ENV PYTHONPATH=$PYTHONPATH:/root/.local/lib/python3.8/site-packages/gmsh-4.7.1-Linux64-sdk/lib/:/root/.local/lib/python3.8/site-packages/   
 WORKDIR /root
