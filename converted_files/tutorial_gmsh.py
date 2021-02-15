@@ -229,7 +229,7 @@ perm_sort = numpy.argsort(cell_dimensions)
 
 from dolfinx.io import ufl_mesh_from_gmsh
 cell_id = cell_information[perm_sort[-1]]["id"]
-cells = topologies[cell_id]["topology"]
+cells = numpy.asarray(topologies[cell_id]["topology"], dtype=numpy.int64)
 ufl_domain = ufl_mesh_from_gmsh(cell_id, 3)
 
 
@@ -269,7 +269,7 @@ from dolfinx.cpp.graph import AdjacencyList_int32
 from dolfinx.cpp.mesh import cell_entity_type
 from dolfinx.mesh import create_meshtags
 # Create MeshTags for cell data
-cell_values = topologies[cell_id]["cell_data"]
+cell_values = numpy.asarray(topologies[cell_id]["cell_data"], dtype=numpy.int32)
 local_entities, local_values = extract_local_entities(mesh, mesh.topology.dim, cells, cell_values)
 mesh.topology.create_connectivity(mesh.topology.dim, 0)
 adj = AdjacencyList_int32(local_entities)
@@ -282,8 +282,8 @@ facet_type = cell_entity_type(to_type(str(ufl_domain.ufl_cell())), mesh.topology
 gmsh_facet_id = cell_information[perm_sort[-2]]["id"]
 num_facet_nodes = cell_information[perm_sort[-2]]["num_nodes"]
 gmsh_facet_perm = perm_gmsh(facet_type, num_facet_nodes)
-marked_facets = topologies[gmsh_facet_id]["topology"]
-facet_values = topologies[gmsh_facet_id]["cell_data"]
+marked_facets = numpy.asarray(topologies[gmsh_facet_id]["topology"], dtype=numpy.int64)
+facet_values = numpy.asarray(topologies[gmsh_facet_id]["cell_data"], dtype=numpy.int32)
 marked_facets = marked_facets[:, gmsh_facet_perm]
 local_entities, local_values = extract_local_entities(mesh, mesh.topology.dim - 1, marked_facets, facet_values)
 mesh.topology.create_connectivity(mesh.topology.dim - 1, mesh.topology.dim)

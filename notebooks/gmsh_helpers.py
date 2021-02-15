@@ -95,22 +95,22 @@ def gmsh_model_to_mesh(model, cell_data=False, facet_data=False, gdim=None):
                 num_facet_nodes = MPI.COMM_WORLD.bcast(
                     cell_information[perm_sort[-2]]["num_nodes"], root=0)
                 gmsh_facet_id = cell_information[perm_sort[-2]]["id"]
-                marked_facets = topologies[gmsh_facet_id]["topology"]
-                facet_values = topologies[gmsh_facet_id]["cell_data"]
+                marked_facets = numpy.asarray(topologies[gmsh_facet_id]["topology"], dtype=numpy.int64)
+                facet_values = numpy.asarray(topologies[gmsh_facet_id]["cell_data"], dtype=numpy.int32)
             else:
                 raise ValueError("No facet data found in file.")
 
-        cells = topologies[cell_id]["topology"]
-        cell_values = topologies[cell_id]["cell_data"]
+        cells = numpy.asarray(topologies[cell_id]["topology"], dtype=numpy.int64)
+        cell_values = numpy.asarray(topologies[cell_id]["cell_data"], dtype=numpy.int32)
 
     else:
         cell_id, num_nodes = MPI.COMM_WORLD.bcast([None, None], root=0)
-        cells, x = numpy.empty([0, num_nodes]), numpy.empty([0, gdim])
-        cell_values = numpy.empty((0,))
+        cells, x = numpy.empty([0, num_nodes], dtype=numpy.int32), numpy.empty([0, gdim])
+        cell_values = numpy.empty((0,), dtype=numpy.int32)
         if facet_data:
             num_facet_nodes = MPI.COMM_WORLD.bcast(None, root=0)
-            marked_facets = numpy.empty((0, num_facet_nodes))
-            facet_values = numpy.empty((0,))
+            marked_facets = numpy.empty((0, num_facet_nodes), dtype=numpy.int32)
+            facet_values = numpy.empty((0,), dtype=numpy.int32)
 
     # Create distributed mesh
     ufl_domain = ufl_mesh_from_gmsh(cell_id, gdim)
