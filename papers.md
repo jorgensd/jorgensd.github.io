@@ -4,7 +4,7 @@ title: Papers
 ## 2021
 {% include _paper.html
     id="scroggs2021dofs"
-    author = "Scroggs, Matthew W. and Dokken, J{\o}rgen S. and Richardson, Chris N. and Wells, Garth N."
+    author = "Scroggs, Matthew W. and Dokken, Jørgen S. and Richardson, Chris N. and Wells, Garth N."
     title = "Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes"
     arxiv =  "2102.11901"
     year= "2021"
