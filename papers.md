@@ -4,11 +4,11 @@ title: Papers
 ## 2021
 {% include _paper.html
     id="scroggs2021dofs"
-    author = "Scroggs, Matthew W. and Dokken, J{\o}rgen S. and Richardson, Chris N. and Wells, Garth N.",
-    title = "Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes",
+    author = "Scroggs, Matthew W. and Dokken, J{\o}rgen S. and Richardson, Chris N. and Wells, Garth N."
+    title = "Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes"
     arxiv =  "2102.11901"
-    year= "2021",
-    journal = "Submitted to ACM Transactions on Mathematical Software",
+    year= "2021"
+    journal = "Submitted to ACM Transactions on Mathematical Software"
 }
 
 ## 2020
