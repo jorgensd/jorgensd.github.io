@@ -9,7 +9,8 @@ title: Papers
     arxiv =  "2102.11901"
     year= "2021"
     journal = "Submitted to ACM Transactions on Mathematical Software"
-}
+    bib="scroggs2021dofs.bib"
+%}
 
 ## 2020
 {% include _paper.html
