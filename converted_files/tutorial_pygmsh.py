@@ -110,17 +110,13 @@ mesh_from_file = meshio.read("mesh.msh")
 
 
 import numpy
-
 def create_mesh(mesh, cell_type, prune_z=False):
-    cells = numpy.vstack([cell.data for cell in mesh.cells if cell.type==cell_type])
-    cell_data = numpy.hstack([mesh.cell_data_dict["gmsh:physical"][key]
-                         for key in mesh.cell_data_dict["gmsh:physical"].keys() if key==cell_type])
-    # Remove z-coordinates from mesh if we have a 2D cell and all points have the same third coordinate
-    points= mesh.points
+    cells = mesh.get_cells_type(cell_type)
+    cell_data = mesh.get_cell_data("gmsh:physical", cell_type)
+    out_mesh = meshio.Mesh(points=mesh.points, cells={cell_type: cells}, cell_data={"name_to_read":[cell_data]})
     if prune_z:
-        points = points[:,:2]
-    mesh_new = meshio.Mesh(points=points, cells={cell_type: cells}, cell_data={"name_to_read":[cell_data]})
-    return mesh_new
+        out_mesh.prune_z_0()
+    return out_mesh
 
 
 # With this function at hand, we can save the meshes to `XDMF`.

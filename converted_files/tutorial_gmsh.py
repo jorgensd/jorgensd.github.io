@@ -248,7 +248,7 @@ cells = cells[:, gmsh_cell_perm]
 
 # The final step is to create the mesh from the topology and geometry
 
-# In[23]:
+# In[19]:
 
 
 from dolfinx.mesh import create_mesh
@@ -313,4 +313,10 @@ gmsh.model.add("Mesh from file")
 gmsh.merge("mesh3D.msh")
 output = gmsh_model_to_mesh(gmsh.model, cell_data=True, facet_data=True, gdim=3)
 gmsh.finalize()
+
+
+# In[ ]:
+
+
+
 
