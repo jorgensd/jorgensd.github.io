@@ -3,11 +3,10 @@
 Welcome to my personal web-page. Here you can find information about me, and the projects I have been working on during my post-graduate studies.
 
 # Latest news
-- The list of talks [FEniCS 2021](https://fenics2021.com/) is now available. 
-- New preprint of [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2021dofs) available on [arxiv](https://arxiv.org/abs/2102.11901).
-- An initial version of the [dolfinx tutorial](https://jorgensd.github.io/dolfinx-tutorial/) is available online. 
-- The [Pygmsh tutorial](converted_files/tutorial_pygmsh.md)  has been updated to use the latest release.
-- A tutorial for usage of of the GMSH API has been added to the [Tutorial pages](converted_files/tutorial_gmsh.md).
+- [TEAM 30 Benchmark](http://www.compumag.org/jsite/images/stories/TEAM/problem30a.pdf) of electromagnetic a 2D induction engine available at [Github (Wells-group/TEAM30)](https://github.com/Wells-Group/TEAM30)
+- Proceedings of the [FEniCS 2021](https://mscroggs.github.io/fenics2021)-conference is available [here](https://figshare.com/articles/conference_contribution/Proceedings_of_FEniCS_2021_22_26_March_2021/14495856). 
+- Preprint of [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2021dofs) available on [arxiv](https://arxiv.org/abs/2102.11901).
+- The [DOLFINx tutorial](https://jorgensd.github.io/dolfinx-tutorial/) is available online. 
 - Simple Taylor-Green solver and [3D Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html) IPCS Navier-Stokes solver for [dolfinx](https://github.com/FEniCS/dolfinx/) is available at [jorgensd/dokken_ipcs](https://github.com/jorgensd/dolfinx_ipcs) on Github!
 
 <br style="clear:both">
