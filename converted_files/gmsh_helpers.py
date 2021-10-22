@@ -130,8 +130,9 @@ def gmsh_model_to_mesh(model, cell_data=False, facet_data=False, gdim=None):
     # Create MeshTags for facets
     if facet_data:
         # Permute facets from MSH to Dolfin-X ordering
+        # FIXME: This does not work for prism meshes
         facet_type = cell_entity_type(to_type(str(ufl_domain.ufl_cell())),
-                                      mesh.topology.dim - 1)
+                                      mesh.topology.dim - 1, 0)
         gmsh_facet_perm = perm_gmsh(facet_type, num_facet_nodes)
         marked_facets = marked_facets[:, gmsh_facet_perm]
 
