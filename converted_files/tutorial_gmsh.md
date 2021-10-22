@@ -253,7 +253,8 @@ ct.name = "Cell tags"
 
 # Create MeshTags for facets
 # Permute facets from MSH to Dolfin-X ordering
-facet_type = cell_entity_type(to_type(str(ufl_domain.ufl_cell())), mesh.topology.dim - 1)
+# FIXME: This does not work for prism meshes
+facet_type = cell_entity_type(to_type(str(ufl_domain.ufl_cell())), mesh.topology.dim - 1, 0)
 gmsh_facet_id = cell_information[perm_sort[-2]]["id"]
 num_facet_nodes = cell_information[perm_sort[-2]]["num_nodes"]
 gmsh_facet_perm = perm_gmsh(facet_type, num_facet_nodes)
