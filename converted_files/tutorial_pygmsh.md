@@ -24,7 +24,6 @@ First we create an empty geometry and the circular obstacle:
 ```python
 import pygmsh
 resolution = 0.01
-
 # Channel parameters
 L = 2.2
 H = 0.41
@@ -97,7 +96,7 @@ import meshio
 mesh_from_file = meshio.read("mesh.msh")
 ```
 
-Now that we have loaded the mesh, we need to extract the cells and physical data. We need to create a separate file for the facets (lines), which we will use when we define boundary conditions in dolfin/dolfin-X. We do this with the following convenient function. Note that as we would like a 2 dimensional mesh, we need to remove the z-values in the mesh coordinates.
+Now that we have loaded the mesh, we need to extract the cells and physical data. We need to create a separate file for the facets (lines), which we will use when we define boundary conditions in DOLFIN/DOLFINx. We do this with the following convenience function. Note that as we would like a 2 dimensional mesh, we need to remove the z-values in the mesh coordinates.
 
 
 ```python
@@ -105,9 +104,8 @@ import numpy
 def create_mesh(mesh, cell_type, prune_z=False):
     cells = mesh.get_cells_type(cell_type)
     cell_data = mesh.get_cell_data("gmsh:physical", cell_type)
-    out_mesh = meshio.Mesh(points=mesh.points, cells={cell_type: cells}, cell_data={"name_to_read":[cell_data]})
-    if prune_z:
-        out_mesh.prune_z_0()
+    points = mesh.points[:,:2] if prune_z else mesh.points
+    out_mesh = meshio.Mesh(points=points, cells={cell_type: cells}, cell_data={"name_to_read":[cell_data]})
     return out_mesh
 ```
 

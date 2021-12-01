@@ -2,14 +2,15 @@
 # coding: utf-8
 
 # # Using the GMSH Python API to generate complex meshes
-# In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `dokken92/pygmsh-6.1.1` docker images, as described in the [pygmsh tutorial](converted_files/tutorial_pygmsh.md). For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab` and a normal docker image with `dolfinx/dolfinx`.
+# In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `dokken92/pygmsh` docker images, as described in the [pygmsh tutorial](converted_files/tutorial_pygmsh.md).
+# 
+# For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab` and a normal docker image with `dolfinx/dolfinx`.
 # 
 # This tutorial can be downloaded as a [Python-file](../converted_files/tutorial_gmsh.py) or as a [Jupyter notebook](../notebooks/tutorial_gmsh.ipynb).
 
 # ## <a name="first"></a> 1. How to create a 3D mesh with physical tags with the GMSH python API.
 # We start by import the gmsh module, and initializing the Python API. **NOTE:** This has to be done in order to run any function in the GMSH API.
 
-# In[1]:
 
 
 import warnings
@@ -20,7 +21,6 @@ gmsh.initialize()
 
 # The next step is to create the rectangular channel of the benchmark. In GMSH, there are two kernels for geometry computations; the `built_in` kernel ( `gmsh.model.geo`), and the [OpenCascade](https://www.opencascade.com/) kernel (`gmsh.model.opencascade`). In this tutorial, we will use the the `occ` kernel, as it is better suited. Other demos of the usage of the gmsh python API can be found in their [GitLab repository](https://gitlab.onelab.info/gmsh/gmsh/-/tree/master/tutorial/python).
 
-# In[2]:
 
 
 gmsh.model.add("DFG 3D")
@@ -30,7 +30,6 @@ channel = gmsh.model.occ.addBox(0, 0, 0, L, B, H)
 
 # The next step is to create the cylinder, which is done in the following way
 
-# In[3]:
 
 
 cylinder = gmsh.model.occ.addCylinder(0.5, 0,0.2,0, B, 0, r)
@@ -39,7 +38,6 @@ cylinder = gmsh.model.occ.addCylinder(0.5, 0,0.2,0, B, 0, r)
 # where the first three arguments describes the (x,y,z) coordinate of the center of the first circular face. The next three arguments describes the axis of height of the cylinder, in this case, it is (0,0.41,0). The final parameter is the radius of the cylinder.
 # We have now created two geometrical objects, that each can be meshed with GMSH. However, we are only interested in the fluid volume in the channel, which whould be the channel excluding the sphere. We use the GMSH command `BooleanDifference` for this
 
-# In[4]:
 
 
 fluid = gmsh.model.occ.cut([(3, channel)], [(3, cylinder)])
@@ -50,7 +48,6 @@ fluid = gmsh.model.occ.cut([(3, channel)], [(3, cylinder)])
 # The next step is to tag physical entities, such as the fluid volume, and inlets, outlets, channel walls and obstacle walls.
 # We start by finding the volumes, which after the `cut`-operation is only the fluid volume. We could have kept the other volumes by supply keyword arguments to the  `cut`operation. See the [GMSH Python API](https://gitlab.onelab.info/gmsh/gmsh/-/blob/master/api/gmsh.py#L5143) for more information. We also need to syncronize the CAD module before tagging entities.
 
-# In[5]:
 
 
 gmsh.model.occ.synchronize()
@@ -63,7 +60,6 @@ gmsh.model.setPhysicalName(volumes[0][0], fluid_marker, "Fluid volume")
 
 # For the surfaces, we start by finding all surfaces, and then compute the geometrical center such that we can indentify which are inlets, outlets, walls and the obstacle. As the walls will consist of multiple surfaces, and the obstacle is circular, we need to find all entites before addin the physical group.
 
-# In[6]:
 
 
 import numpy as np
@@ -92,7 +88,6 @@ gmsh.model.setPhysicalName(2, obstacle_marker, "Obstacle")
 
 # The final step is to set mesh resolutions. We will use `GMSH Fields` to do this. One can alternatively set mesh resolutions at points with the command `gmsh.model.occ.mesh.setSize`. We start by specifying a distance field from the obstacle surface
 
-# In[7]:
 
 
 gmsh.model.mesh.field.add("Distance", 1)
@@ -108,7 +103,6 @@ gmsh.model.mesh.field.setNumbers(1, "FacesList", obstacles)
 #       Point    DistMin DistMax
 # ```
 
-# In[8]:
 
 
 resolution = r/10
@@ -122,7 +116,6 @@ gmsh.model.mesh.field.setNumber(2, "DistMax", r)
 
 # We add a similar threshold at the inlet to ensure fully resolved inlet flow
 
-# In[9]:
 
 
 gmsh.model.mesh.field.add("Distance", 3)
@@ -137,7 +130,6 @@ gmsh.model.mesh.field.setNumber(4, "DistMax", 0.5)
 
 # We combine these fields by using the minimum field
 
-# In[10]:
 
 
 gmsh.model.mesh.field.add("Min", 5)
@@ -147,7 +139,6 @@ gmsh.model.mesh.field.setAsBackgroundMesh(5)
 
 # Before meshing the model, we need to use the syncronize command
 
-# In[11]:
 
 
 gmsh.model.occ.synchronize()
@@ -156,7 +147,6 @@ gmsh.model.mesh.generate(3)
 
 # We can write the mesh to msh to be visualized with gmsh with the following command
 
-# In[12]:
 
 
 gmsh.write("mesh3D.msh")
@@ -174,7 +164,6 @@ gmsh.write("mesh3D.msh")
 # ### Stort tutorial
 # Download [gmsh_helpers.py](gmsh_helpers.py), and run the following
 
-# In[13]:
 
 
 from gmsh_helpers import gmsh_model_to_mesh
@@ -186,13 +175,11 @@ mesh, cell_tags, facet_tags = gmsh_model_to_mesh(gmsh.model, cell_data=True, fac
 # If you want to learn what the `gmsh_model_to_mesh` function is actualy doing, the rest of this section will go through it step by step. Note that the long tutorial assumes that you are running in serial, and does therefore not require the MPI-communication found in `gmsh_model_to_mesh`.
 # We start by using some convenience functions from dolfin-x to extract the mesh geometry (the nodes of the mesh) and the mesh topology (the cell connectivities) for the mesh.
 
-# In[14]:
 
 
 from dolfinx.io import extract_gmsh_geometry, extract_gmsh_topology_and_markers 
 
 
-# In[15]:
 
 
 x = extract_gmsh_geometry(gmsh.model)
@@ -203,7 +190,6 @@ topologies = extract_gmsh_topology_and_markers(gmsh.model)
 # 
 # As an MSH-file can contain meshes for multiple topological dimensions (0=vertices, 1=lines, 2=surfaces, 3=volumes), we have to determine which of the cells has to highest topological dimension. We do this with the following snippet
 
-# In[16]:
 
 
 import numpy
@@ -224,7 +210,6 @@ perm_sort = numpy.argsort(cell_dimensions)
 
 # We extract the topology of the cell with the highest topological dimension from `topologies`, and create the corresponding `ufl.domain.Mesh` for the given celltype
 
-# In[17]:
 
 
 from dolfinx.io import ufl_mesh_from_gmsh
@@ -236,7 +221,6 @@ ufl_domain = ufl_mesh_from_gmsh(cell_id, 3)
 # As the GMSH model has the cell topology ordered as specified in the  [MSH format](http://gmsh.info//doc/texinfo/gmsh.html#Node-ordering),
 # we have to permute the topology to the [FIAT format](https://github.com/FEniCS/dolfinx/blob/e7f0a504e6ff538ad9992d8be73f74f53b630d11/cpp/dolfinx/io/cells.h#L16-L77). The permuation is done using the `perm_gmsh` function from dolfin-X.
 
-# In[18]:
 
 
 from dolfinx.cpp.io import perm_gmsh
@@ -248,7 +232,6 @@ cells = cells[:, gmsh_cell_perm]
 
 # The final step is to create the mesh from the topology and geometry
 
-# In[19]:
 
 
 from dolfinx.mesh import create_mesh
@@ -258,16 +241,15 @@ mesh = create_mesh(MPI.COMM_WORLD, cells, x, ufl_domain)
 
 # As the meshes can contain markers for the cells or any sub entity, the next snippets show how to extract this info to GMSH into `dolfinx.MeshTags`.
 
-# In[20]:
 
 
-from dolfinx.cpp.io import extract_local_entities
+from dolfinx.cpp.io import distribute_entity_data
 from dolfinx.cpp.graph import AdjacencyList_int32
 from dolfinx.cpp.mesh import cell_entity_type
 from dolfinx.mesh import create_meshtags
 # Create MeshTags for cell data
 cell_values = numpy.asarray(topologies[cell_id]["cell_data"], dtype=numpy.int32)
-local_entities, local_values = extract_local_entities(mesh, mesh.topology.dim, cells, cell_values)
+local_entities, local_values = distribute_entity_data(mesh, mesh.topology.dim, cells, cell_values)
 mesh.topology.create_connectivity(mesh.topology.dim, 0)
 adj = AdjacencyList_int32(local_entities)
 ct = create_meshtags(mesh, mesh.topology.dim, adj, numpy.int32(local_values))
@@ -283,11 +265,18 @@ gmsh_facet_perm = perm_gmsh(facet_type, num_facet_nodes)
 marked_facets = numpy.asarray(topologies[gmsh_facet_id]["topology"], dtype=numpy.int64)
 facet_values = numpy.asarray(topologies[gmsh_facet_id]["cell_data"], dtype=numpy.int32)
 marked_facets = marked_facets[:, gmsh_facet_perm]
-local_entities, local_values = extract_local_entities(mesh, mesh.topology.dim - 1, marked_facets, facet_values)
+local_entities, local_values = distribute_entity_data(mesh, mesh.topology.dim - 1, marked_facets, facet_values)
 mesh.topology.create_connectivity(mesh.topology.dim - 1, mesh.topology.dim)
 adj = AdjacencyList_int32(local_entities)
 ft = create_meshtags(mesh, mesh.topology.dim - 1,adj, numpy.int32(local_values))
 ft.name = "Facet tags"
+
+# Output DOLFINx meshes to file
+from dolfinx.io import XDMFFile
+with XDMFFile(MPI.COMM_WORLD, "mesh_out.xdmf", "w") as xdmf:
+    xdmf.write_mesh(mesh)
+    xdmf.write_meshtags(ft)
+    xdmf.write_meshtags(ct)
 
 
 # ## <a name="third"></a> 3. How to load msh files into dolfin-X
@@ -295,7 +284,6 @@ ft.name = "Facet tags"
 # We will do this by using the `gmsh_model_to_mesh` function explained in detail in the previous section.
 # We load the `read_from_msh`-function from [gmsh_helpers.py](gmsh_helpers.py) and use it in the following way
 
-# In[21]:
 
 
 from gmsh_helpers import read_from_msh
@@ -305,7 +293,6 @@ mesh, cell_tags, facet_tags = read_from_msh("mesh3D.msh", cell_data=True, facet_
 # What this function does, is that it uses the `gmsh.merge` command to create a gmsh model of the msh file and then in turn calls the `gmsh_model_to_mesh` function.
 # The `read_from_msh` function also handles MPI communication and gmsh initialization/finalization.
 
-# In[22]:
 
 
 gmsh.finalize()
@@ -314,10 +301,4 @@ gmsh.model.add("Mesh from file")
 gmsh.merge("mesh3D.msh")
 output = gmsh_model_to_mesh(gmsh.model, cell_data=True, facet_data=True, gdim=3)
 gmsh.finalize()
-
-
-# In[ ]:
-
-
-
 

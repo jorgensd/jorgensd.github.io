@@ -1,5 +1,7 @@
 # Using the GMSH Python API to generate complex meshes
-In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `dokken92/pygmsh-6.1.1` docker images, as described in the [pygmsh tutorial](converted_files/tutorial_pygmsh.md). For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab` and a normal docker image with `dolfinx/dolfinx`.
+In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `dokken92/pygmsh` docker images, as described in the [pygmsh tutorial](converted_files/tutorial_pygmsh.md).
+
+For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab` and a normal docker image with `dolfinx/dolfinx`.
 
 This tutorial can be downloaded as a [Python-file](../converted_files/tutorial_gmsh.py) or as a [Jupyter notebook](../notebooks/tutorial_gmsh.ipynb).
 
@@ -239,13 +241,13 @@ As the meshes can contain markers for the cells or any sub entity, the next snip
 
 
 ```python
-from dolfinx.cpp.io import extract_local_entities
+from dolfinx.cpp.io import distribute_entity_data
 from dolfinx.cpp.graph import AdjacencyList_int32
 from dolfinx.cpp.mesh import cell_entity_type
 from dolfinx.mesh import create_meshtags
 # Create MeshTags for cell data
 cell_values = numpy.asarray(topologies[cell_id]["cell_data"], dtype=numpy.int32)
-local_entities, local_values = extract_local_entities(mesh, mesh.topology.dim, cells, cell_values)
+local_entities, local_values = distribute_entity_data(mesh, mesh.topology.dim, cells, cell_values)
 mesh.topology.create_connectivity(mesh.topology.dim, 0)
 adj = AdjacencyList_int32(local_entities)
 ct = create_meshtags(mesh, mesh.topology.dim, adj, numpy.int32(local_values))
@@ -261,11 +263,18 @@ gmsh_facet_perm = perm_gmsh(facet_type, num_facet_nodes)
 marked_facets = numpy.asarray(topologies[gmsh_facet_id]["topology"], dtype=numpy.int64)
 facet_values = numpy.asarray(topologies[gmsh_facet_id]["cell_data"], dtype=numpy.int32)
 marked_facets = marked_facets[:, gmsh_facet_perm]
-local_entities, local_values = extract_local_entities(mesh, mesh.topology.dim - 1, marked_facets, facet_values)
+local_entities, local_values = distribute_entity_data(mesh, mesh.topology.dim - 1, marked_facets, facet_values)
 mesh.topology.create_connectivity(mesh.topology.dim - 1, mesh.topology.dim)
 adj = AdjacencyList_int32(local_entities)
 ft = create_meshtags(mesh, mesh.topology.dim - 1,adj, numpy.int32(local_values))
 ft.name = "Facet tags"
+
+# Output DOLFINx meshes to file
+from dolfinx.io import XDMFFile
+with XDMFFile(MPI.COMM_WORLD, "mesh_out.xdmf", "w") as xdmf:
+    xdmf.write_mesh(mesh)
+    xdmf.write_meshtags(ft)
+    xdmf.write_meshtags(ct)
 ```
 
 ## <a name="third"></a> 3. How to load msh files into dolfin-X
@@ -292,7 +301,3 @@ output = gmsh_model_to_mesh(gmsh.model, cell_data=True, facet_data=True, gdim=3)
 gmsh.finalize()
 ```
 
-
-```python
-
-```

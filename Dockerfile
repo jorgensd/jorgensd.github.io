@@ -3,12 +3,15 @@
 # Authors:
 # Jørgen S. Dokken <dokken92@gmail.com>
 
-FROM ubuntu:20.04 as pygmsh-env
+FROM ubuntu:21.10 as pygmsh-env
 
 WORKDIR /tmp
 
 ARG MPI="mpich"
 ARG MAKEFLAGS
+ARG GMSH_VERSION="4.8.4"
+ARG PYGMSH_VERSION="7.1.13"
+ARG MESHIO_VERSION="5.0.5"
 
 # First dependencies are general dependencies
 # Second set are GMSH deps
@@ -41,15 +44,19 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-RUN export export HDF5_MPI="ON" && \
-    export HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/" && \
-    export CC=mpicc && \ 
-    pip3 install --no-cache-dir --no-binary=h5py h5py meshio 
+RUN HDF5_MPI="ON" HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/" CC=mpicc pip3 install --no-cache-dir --no-binary=h5py h5py meshio==${MESHIO_VERSION} 
 
 # Meshio python deps via pip
-RUN pip3 install pygmsh mpi4py && \
-    pip3 install gmsh --user
+RUN pip3 install pygmsh==${PYGMSH_VERSION} mpi4py && \
+    pip3 install gmsh==${GMSH_VERSION} --user
 
-ENV PATH=$PATH:/root/.local/bin
-ENV PYTHONPATH=$PYTHONPATH:/root/.local/lib/python3.8/site-packages/gmsh-4.7.1-Linux64-sdk/lib/:/root/.local/lib/python3.8/site-packages/   
+ENV PATH=$PATH:/usr/local/bin
+ENV PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.9/site-packages/gmsh-${GMSH_VERSION}-Linux64-sdk/lib/
 WORKDIR /root
+
+# Activate for jupter notebook
+RUN pip3 install --upgrade --no-cache-dir jupyter jupyterlab
+# EXPOSE 8888/tcp
+# ENV SHELL /bin/bash
+
+# ENTRYPOINT ["jupyter", "lab", "--ip", "0.0.0.0", "--no-browser", "--allow-root"]
