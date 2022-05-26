@@ -12,7 +12,7 @@ title: Papers
     doi = "10.1145/3524456"
     year = "2022"
     journal = "ACM Transactions on Mathematical Software"
-    bib= " scroggs2022dofs.bib"
+    bib = "scroggs2022dofs.bib"
 %}
 
 ## 2020
