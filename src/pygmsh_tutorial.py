@@ -143,7 +143,7 @@ union = model3D.boolean_union([box0, box1])
 union_minus_ball = model3D.boolean_fragments(union, ball)
 model3D.synchronize()
 
-# To create physical markers for the two regions, we use the `add_physical` function. This function only works nicely if the domain whose boundary should be preserved (the sphere) is fully embedded in the other domain (the union of boxes). For more complex operations, it is recommened to do the tagging of entities in the gmsh GUI, as explained in the [GMSH tutorial](converted_files/tutorial_gmsh.md).
+# To create physical markers for the two regions, we use the `add_physical` function. This function only works nicely if the domain whose boundary should be preserved (the sphere) is fully embedded in the other domain (the union of boxes). For more complex operations, it is recommened to do the tagging of entities in the gmsh GUI, as explained in the [GMSH tutorial](tutorial_gmsh.md).
 
 model3D.add_physical(union, "Union")
 model3D.add_physical(union_minus_ball, "Union minus ball")

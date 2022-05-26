@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Jørgen S. Dokken
+# Copyright (C) 2022 Jørgen S. Dokken
 #
 # SPDX-License-Identifier:    LGPL-3.0-or-later
 #
@@ -12,9 +12,9 @@ import gmsh
 from mpi4py import MPI
 from dolfinx.io import extract_gmsh_geometry, extract_gmsh_topology_and_markers, ufl_mesh_from_gmsh
 from dolfinx.cpp.io import perm_gmsh, distribute_entity_data
-from dolfinx.cpp.mesh import to_type, cell_entity_type
+from dolfinx.cpp.mesh import to_type, cell_entity_type, create_meshtags
 from dolfinx.cpp.graph import AdjacencyList_int32
-from dolfinx.mesh import create_meshtags, create_mesh
+from dolfinx.mesh import meshtags, create_mesh
 
 
 def read_from_msh(filename: str, cell_data=False, facet_data=False, gdim=None):
@@ -123,8 +123,7 @@ def gmsh_model_to_mesh(model, cell_data=False, facet_data=False, gdim=None):
             mesh, mesh.topology.dim, cells, cell_values)
         mesh.topology.create_connectivity(mesh.topology.dim, 0)
         adj = AdjacencyList_int32(local_entities)
-        ct = create_meshtags(mesh, mesh.topology.dim,
-                             adj, numpy.int32(local_values))
+        ct = create_meshtags(mesh, mesh.topology.dim, adj, local_values)
         ct.name = "Cell tags"
 
     # Create MeshTags for facets
@@ -141,8 +140,7 @@ def gmsh_model_to_mesh(model, cell_data=False, facet_data=False, gdim=None):
         mesh.topology.create_connectivity(
             mesh.topology.dim - 1, mesh.topology.dim)
         adj = AdjacencyList_int32(local_entities)
-        ft = create_meshtags(mesh, mesh.topology.dim - 1,
-                             adj, numpy.int32(local_values))
+        ft = create_meshtags(mesh, mesh.topology.dim - 1, adj, local_values)
         ft.name = "Facet tags"
 
     if cell_data and facet_data:

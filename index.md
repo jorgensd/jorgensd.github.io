@@ -3,10 +3,10 @@
 Welcome to my personal web-page. Here you can find information about me, and the projects I have been working on during my post-graduate studies.
 
 # Latest news
+- [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2022dofs) open-access publication at [TOMS](https://doi.org/10.1145/3524456).
+- The [DOLFINx tutorial](https://jorgensd.github.io/dolfinx-tutorial/) v0.4.1 has been released. 
 - [TEAM 30 Benchmark](http://www.compumag.org/jsite/images/stories/TEAM/problem30a.pdf) of electromagnetic a 2D induction engine available at [Github (Wells-group/TEAM30)](https://github.com/Wells-Group/TEAM30)
 - Proceedings of the [FEniCS 2021](https://mscroggs.github.io/fenics2021)-conference is available [here](https://figshare.com/articles/conference_contribution/Proceedings_of_FEniCS_2021_22_26_March_2021/14495856). 
-- Preprint of [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2021dofs) available on [arxiv](https://arxiv.org/abs/2102.11901).
-- The [DOLFINx tutorial](https://jorgensd.github.io/dolfinx-tutorial/) is available online. 
 - Simple Taylor-Green solver and [3D Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html) IPCS Navier-Stokes solver for [dolfinx](https://github.com/FEniCS/dolfinx/) is available at [jorgensd/dokken_ipcs](https://github.com/jorgensd/dolfinx_ipcs) on Github!
 
 <br style="clear:both">
@@ -23,7 +23,7 @@ I am currently a Postdoctoral Research Associate at the University of Cambridge,
 I am involved in the development of the following software:
 ![The FEniCS logo](assets/img/fenics_logo.png){: .image-right }
 - [dolfinx](https://github.com/FEniCS/dolfinx) - The next generation FEniCS problem solving environment
-  - [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2021dofs)
+  - [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2022dofs)
 - [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc)- An extension to Dolfin-X supporting multi-point constraints (such as contact and slip conditions)
 - [The FEniCS project](https://bitbucket.org/fenics-project/) - An open-source computing platform for solving partial differential equations using the finite element method. My main focus in this software was the multimesh finite element method, resulting in the following papers:
   - [A multimesh finite element method for the Navier--Stokes equations based on projection methods](papers.md#dokken2020navier)
