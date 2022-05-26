@@ -16,13 +16,13 @@ jobs:
   # This workflow contains a single job called "build"
   test-pygmsh:
     # The type of runner that the job will run on
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container: dokken92/pygmsh:latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
       - name: Run python scripts
@@ -36,9 +36,9 @@ jobs:
       #     echo test, and deploy your project.
 
   test-gmsh:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container: dolfinx/dolfinx
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run python scripts
-        run: python3 converted_files/tutorial_gmsh.py
+        run: python3 src/tutorial_gmsh.py
