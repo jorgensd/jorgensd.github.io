@@ -27,7 +27,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run python scripts
         run: |
-          python3 converted_files/tutorial_pygmsh.py
+          python3 src/pygmsh_tutorial.py
 
       # Runs a set of commands using the runners shell
       # - name: Run a multi-line script
