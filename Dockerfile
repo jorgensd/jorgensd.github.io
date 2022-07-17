@@ -1,4 +1,4 @@
-# This is a Dockerfile used to install dependecies for my webpage
+# This is a Dockerfile used to install dependencies for my webpage
 #
 # Authors:
 # Jørgen S. Dokken <dokken92@gmail.com>
@@ -9,7 +9,7 @@ WORKDIR /tmp
 
 ARG MPI="mpich"
 ARG MAKEFLAGS
-ARG GMSH_VERSION="4.10.3"
+ARG GMSH_VERSION="4.10.5"
 ARG PYGMSH_VERSION="7.1.17"
 ARG MESHIO_VERSION="5.3.4"
 
