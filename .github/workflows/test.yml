@@ -37,7 +37,7 @@ jobs:
 
   test-gmsh:
     runs-on: ubuntu-22.04
-    container: dolfinx/dolfinx
+    container: dolfinx/dolfinx:nightly
     steps:
       - uses: actions/checkout@v3
       - name: Run python scripts
