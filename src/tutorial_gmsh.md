@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.13.8
+      jupytext_version: 1.14.1
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -16,7 +16,7 @@ jupyter:
 # Using the GMSH Python API to generate complex meshes
 In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `dokken92/pygmsh` docker images, as described in the [pygmsh tutorial](tutorial_pygmsh.md).
 
-For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab` and a normal docker image with `dolfinx/dolfinx`.
+For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab:v0.5.1` and a normal docker image with `dolfinx/dolfinx:v0.5.1`.
 
 This tutorial can be downloaded as a [Python-file](tutorial_gmsh.py) or as a [Jupyter notebook](tutorial_gmsh.ipynb).
 
@@ -99,8 +99,8 @@ gmsh.model.setPhysicalName(2, obstacle_marker, "Obstacle")
 The final step is to set mesh resolutions. We will use `GMSH Fields` to do this. One can alternatively set mesh resolutions at points with the command `gmsh.model.occ.mesh.setSize`. We start by specifying a distance field from the obstacle surface
 
 ```python
-gmsh.model.mesh.field.add("Distance", 1)
-gmsh.model.mesh.field.setNumbers(1, "FacesList", obstacles)
+distance = gmsh.model.mesh.field.add("Distance")
+gmsh.model.mesh.field.setNumbers(distance, "FacesList", obstacles)
 ```
 
 The next step is to use a threshold function vary the resolution from these surfaces in the following way:
@@ -114,34 +114,34 @@ LcMin -o---------/
 
 ```python
 resolution = r/10
-gmsh.model.mesh.field.add("Threshold", 2)
-gmsh.model.mesh.field.setNumber(2, "IField", 1)
-gmsh.model.mesh.field.setNumber(2, "LcMin", resolution)
-gmsh.model.mesh.field.setNumber(2, "LcMax", 20*resolution)
-gmsh.model.mesh.field.setNumber(2, "DistMin", 0.5*r)
-gmsh.model.mesh.field.setNumber(2, "DistMax", r)
+threshold = gmsh.model.mesh.field.add("Threshold")
+gmsh.model.mesh.field.setNumber(threshold, "IField", distance)
+gmsh.model.mesh.field.setNumber(threshold, "LcMin", resolution)
+gmsh.model.mesh.field.setNumber(threshold, "LcMax", 20*resolution)
+gmsh.model.mesh.field.setNumber(threshold, "DistMin", 0.5*r)
+gmsh.model.mesh.field.setNumber(threshold, "DistMax", r)
 ```
 
 
 We add a similar threshold at the inlet to ensure fully resolved inlet flow
 
 ```python
-gmsh.model.mesh.field.add("Distance", 3)
-gmsh.model.mesh.field.setNumbers(3, "FacesList", [inlet])
-gmsh.model.mesh.field.add("Threshold", 4)
-gmsh.model.mesh.field.setNumber(4, "IField", 3)
-gmsh.model.mesh.field.setNumber(4, "LcMin", 5*resolution)
-gmsh.model.mesh.field.setNumber(4, "LcMax", 10*resolution)
-gmsh.model.mesh.field.setNumber(4, "DistMin", 0.1)
-gmsh.model.mesh.field.setNumber(4, "DistMax", 0.5)
+inlet_dist = gmsh.model.mesh.field.add("Distance")
+gmsh.model.mesh.field.setNumbers(inlet_dist, "FacesList", [inlet])
+inlet_thre = gmsh.model.mesh.field.add("Threshold")
+gmsh.model.mesh.field.setNumber(inlet_thre, "IField", inlet_dist)
+gmsh.model.mesh.field.setNumber(inlet_thre, "LcMin", 5*resolution)
+gmsh.model.mesh.field.setNumber(inlet_thre, "LcMax", 10*resolution)
+gmsh.model.mesh.field.setNumber(inlet_thre, "DistMin", 0.1)
+gmsh.model.mesh.field.setNumber(inlet_thre, "DistMax", 0.5)
 ```
 
 We combine these fields by using the minimum field
 
 ```python
-gmsh.model.mesh.field.add("Min", 5)
-gmsh.model.mesh.field.setNumbers(5, "FieldsList", [2, 4])
-gmsh.model.mesh.field.setAsBackgroundMesh(5)
+minimum = gmsh.model.mesh.field.add("Min")
+gmsh.model.mesh.field.setNumbers(minimum, "FieldsList", [threshold, inlet_thre])
+gmsh.model.mesh.field.setAsBackgroundMesh(minimum)
 ```
 
 Before meshing the model, we need to use the syncronize command
