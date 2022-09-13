@@ -152,7 +152,7 @@ mesh, cell_tags, facet_tags = model_to_mesh(gmsh.model, MPI.COMM_WORLD, model_ra
 # This function creates a mesh on processor 0 with GMSH and distributes the mesh data in a `dolfinx.Mesh` for parallel usage. The flags `cell_data` and `facet_data` are booleans that indicates that you would like to extract cell and facet markers from the gmsh model. The last flag `gdim` indicates the geometrical dimension of your mesh, and should be set to `2` if you want to have a 2D geometry.
 # ### Long tutorial
 # If you want to learn what the `model_to_mesh` function is actually doing (excluding MPI communication for distributing the mesh), the rest of this section will go through it step by step.
-# We start by using some convenience functions from dolfin-x to extract the mesh geometry (the nodes of the mesh) and the mesh topology (the cell connectivities) for the mesh.
+# We start by using some convenience functions from DOLFINx to extract the mesh geometry (the nodes of the mesh) and the mesh topology (the cell connectivities) for the mesh.
 
 from dolfinx.io import gmshio
 x = gmshio.extract_geometry(gmsh.model)
@@ -188,7 +188,7 @@ cells = numpy.asarray(topologies[cell_id]["topology"], dtype=numpy.int64)
 ufl_domain = gmshio.ufl_mesh(cell_id, 3)
 
 # As the GMSH model has the cell topology ordered as specified in the  [MSH format](http://gmsh.info//doc/texinfo/gmsh.html#Node-ordering),
-# we have to permute the topology to the [FIAT format](https://github.com/FEniCS/dolfinx/blob/e7f0a504e6ff538ad9992d8be73f74f53b630d11/cpp/dolfinx/io/cells.h#L16-L77). The permuation is done using the `perm_gmsh` function from dolfin-X.
+# we have to permute the topology to the [FIAT format](https://github.com/FEniCS/dolfinx/blob/e7f0a504e6ff538ad9992d8be73f74f53b630d11/cpp/dolfinx/io/cells.h#L16-L77). The permuation is done using the `perm_gmsh` function from DOLFINx.
 
 from dolfinx.cpp.io import perm_gmsh
 from dolfinx.cpp.mesh import to_type
@@ -244,7 +244,7 @@ with XDMFFile(MPI.COMM_WORLD, "mesh_out.xdmf", "w") as xdmf:
 # -
 
 # ## <a name="third"></a> 3. How to load msh files into DOLFINx
-# In the previous tutorial, we learnt how to load a gmsh python model into dolfin-X. In this section, we will learn how to load an "msh" file into DOLFINx.
+# In the previous tutorial, we learnt how to load a gmsh python model into DOLFINx. In this section, we will learn how to load an "msh" file into DOLFINx.
 # We will do this by using the convenience function `gmshio.read_from_msh`
 
 mesh, cell_tags, facet_tags = gmshio.read_from_msh("mesh3D.msh", MPI.COMM_WORLD, 0, gdim=3)

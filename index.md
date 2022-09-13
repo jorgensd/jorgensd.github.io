@@ -25,7 +25,7 @@ I am involved in the development of the following software:
 ![The FEniCS logo](assets/img/fenics_logo.png){: .image-right }
 - [dolfinx](https://github.com/FEniCS/dolfinx) - The next generation FEniCS problem solving environment
   - [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2022dofs)
-- [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc)- An extension to Dolfin-X supporting multi-point constraints (such as contact and slip conditions)
+- [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc)- An extension to DOLFINx supporting multi-point constraints (such as contact and slip conditions)
 - [The FEniCS project](https://bitbucket.org/fenics-project/) - An open-source computing platform for solving partial differential equations using the finite element method. My main focus in this software was the multimesh finite element method, resulting in the following papers:
   - [A multimesh finite element method for the Navier--Stokes equations based on projection methods](papers.md#dokken2020navier)
   - [Shape Optimization Using the Finite Element Method on Multiple Meshes with Nitsche Coupling](papers.md#dokken2019shape)

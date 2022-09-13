@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.13.8
+#       jupytext_version: 1.14.1
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -92,8 +92,8 @@ gmsh.write("mesh.msh")
 gmsh.clear()
 geometry.__exit__()
 
-# ## <a name="second"></a>2. How to convert your mesh to XDMF
-# Now that we have save the mesh to a `msh` file, we would like to convert it to a format that interfaces with dolfin and dolfin-X. 
+# ## <a name="second"></a>2. How to convert your mesh to XDM
+# Now that we have save the mesh to a `msh` file, we would like to convert it to a format that interfaces with DOLFIN and DOLFINx. 
 # For this I suggest using the `XDMF`-format as it supports parallel IO.
 
 import meshio
