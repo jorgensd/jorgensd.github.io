@@ -15,6 +15,7 @@ ARG MESHIO_VERSION="5.3.4"
 
 ENV HDF5_MPI="ON"
 
+
 # First dependencies are general dependencies
 # Second set are GMSH deps
 # Third set is meshio deps
@@ -49,7 +50,14 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 RUN cd / && \
     find -iname "*HDF5*.so"
 
-RUN CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py
+RUN dpkgArch="$(dpkg --print-architecture)";
+case "$dpkgArch" in amd64 \
+    HDF5_DIR="/usr/lib/x86_64-linux-gnu/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
+    esac;
+case "$dpkgArch" in arm \
+    HDF5_DIR="/usr/lib/arm/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
+    esac;
+
 RUN python3 -m pip install meshio
 
 # Meshio python deps via pip
