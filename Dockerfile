@@ -14,7 +14,6 @@ ARG PYGMSH_VERSION="7.1.17"
 ARG MESHIO_VERSION="5.3.4"
 
 ENV HDF5_MPI="ON"
-ENV HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/"
 
 # First dependencies are general dependencies
 # Second set are GMSH deps
