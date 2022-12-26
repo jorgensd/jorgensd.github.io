@@ -28,24 +28,21 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     lib${MPI}-dev \
     pkg-config \
     libxft2 \
-    python3-pip 
-
-RUN apt-get -y install \
+    python3-pip &&\
+    apt-get -y install \
     doxygen \
     git \
     graphviz \
     sudo \
     valgrind \
-    wget
-
-RUN apt-get -y install \
+    wget && \
+    apt-get -y install \
     libglu1 \
     libxcursor-dev \
     libxinerama1 \
     libgl-dev \
-    libxft2
-
-RUN apt-get -y install \
+    libxft2 && \
+    apt-get -y install \
     python3-lxml && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
