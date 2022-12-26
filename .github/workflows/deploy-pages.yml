@@ -6,7 +6,8 @@ on:
   push:
     branches:
       - "**"
-
+env:
+    PUBLISH_DIR: _build
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -19,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-push-image:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -33,6 +34,12 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          destination: ${{ env.PUBLISH_DIR }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ${{ env.PUBLISH_DIR }}
 
   # Single deploy job since we're just deploying
   deploy:
