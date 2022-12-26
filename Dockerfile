@@ -46,7 +46,9 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN CC=mpicc python3 -m pip install --no-cache-dir --no-binary=h5py h5py
+RUN find -iname "*HDF5*.so"
+
+RUN CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py
 RUN python3 -m pip install meshio
 
 # Meshio python deps via pip
