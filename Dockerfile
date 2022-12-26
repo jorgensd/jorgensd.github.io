@@ -50,11 +50,13 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 RUN cd / && \
     find -iname "*HDF5*.so"
 
-RUN dpkgArch="$(dpkg --print-architecture)";
-case "$dpkgArch" in amd64 \
+RUN dpkgArch="$(dpkg --print-architecture)"; \
+    case "$dpkgArch" in amd64) \
     HDF5_DIR="/usr/lib/x86_64-linux-gnu/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
     esac;
-case "$dpkgArch" in arm \
+
+RUN dpkgArch="$(dpkg --print-architecture)"; \
+    case "$dpkgArch" in arm) \
     HDF5_DIR="/usr/lib/arm/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
     esac;
 
