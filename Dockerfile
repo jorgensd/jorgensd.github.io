@@ -28,6 +28,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     lib${MPI}-dev \
     pkg-config \
     libxft2 \
+    wget \
+    cmake \
     python3-pip &&\
     apt-get -y install \
     doxygen \
