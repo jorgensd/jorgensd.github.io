@@ -30,14 +30,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Build Jekyll pages
+        - name: Build Jekyll pages
         uses: actions/jekyll-build-pages@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           destination: ${{ env.PUBLISH_DIR }}
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v1.0.7
         with:
           path: ${{ env.PUBLISH_DIR }}
 
