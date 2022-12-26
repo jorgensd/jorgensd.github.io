@@ -9,13 +9,13 @@ WORKDIR /tmp
 
 ARG MPI="mpich"
 ARG MAKEFLAGS
-ARG GMSH_VERSION="4.11.1"
+ARG GMSH_VERSION="4_11_1"
 ARG PYGMSH_VERSION="7.1.17"
 ARG MESHIO_VERSION="5.3.4"
-ARG HDF5_SERIES=1.13
-ARG HDF5_PATCH=1
+ARG HDF5_SERIES="1.13"
+ARG HDF5_PATCH="3"
 ENV HDF5_MPI="ON"
-
+ENV HDF5_DIR="/usr/local"
 
 # First dependencies are general dependencies
 # Second set are GMSH deps
@@ -30,6 +30,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     libxft2 \
     wget \
     cmake \
+    ninja-build \
     python3-pip &&\
     apt-get -y install \
     doxygen \
@@ -52,7 +53,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 # Install HDF5
 RUN wget -nc --quiet https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_SERIES}/hdf5-${HDF5_SERIES}.${HDF5_PATCH}/src/hdf5-${HDF5_SERIES}.${HDF5_PATCH}.tar.gz && \
     tar xfz hdf5-${HDF5_SERIES}.${HDF5_PATCH}.tar.gz && \
-    cmake -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release -DHDF5_ENABLE_PARALLEL=on -DHDF5_ENABLE_Z_LIB_SUPPORT=on -B build-dir -S hdf5-${HDF5_SERIES}.${HDF5_PATCH} && \
+    cmake -G Ninja -DCMAKE_INSTALL_PREFIX=${HDF5_DIR} -DCMAKE_BUILD_TYPE=Release -DHDF5_ENABLE_PARALLEL=on -DHDF5_ENABLE_Z_LIB_SUPPORT=on -B build-dir -S hdf5-${HDF5_SERIES}.${HDF5_PATCH} && \
     cmake --build build-dir && \
     cmake --install build-dir && \
     rm -rf /tmp/*
@@ -78,7 +79,7 @@ RUN python3 -m pip install meshio
 RUN python3 -m pip install pygmsh==${PYGMSH_VERSION}
 
 # Install MPI4py
-RUN python3 -m pip install h5py
+RUN python3 -m pip install mpi4py
 
 ENV PATH=$PATH:/usr/local/bin
 WORKDIR /root
