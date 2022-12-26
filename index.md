@@ -3,6 +3,7 @@
 Welcome to my personal web-page. Here you can find information about me, and the projects I have been working on during my post-graduate studies.
 
 # Latest news
+- A web resource for reproducible research available at [scientificcomputing@github](https://scientificcomputing.github.io/) 
 - [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2022dofs) open-access publication at [TOMS](https://doi.org/10.1145/3524456).
 - The [DOLFINx tutorial](https://jorgensd.github.io/dolfinx-tutorial/) v0.4.1 has been released. 
 - [TEAM 30 Benchmark](http://www.compumag.org/jsite/images/stories/TEAM/problem30a.pdf) of electromagnetic a 2D induction engine available at [Github (Wells-group/TEAM30)](https://github.com/Wells-Group/TEAM30)
@@ -13,10 +14,12 @@ Welcome to my personal web-page. Here you can find information about me, and the
 
 # About me
 
-I am currently employed at [Simula Research Laboratory](https://www.simula.no/people/dokken) as a Research Engineer. I am also one of the adiminstrators of the [FEniCS Discourse forum](https://fenicsproject.discourse.group/) and I'm member of the [FEniCS Steering Council](https://github.com/FEniCS/governance/blob/master/governance.md#steering-council).
+I am currently employed at [Simula Research Laboratory](https://www.simula.no/people/dokken) as a Research Engineer. I am also one of the adminstrators of the [FEniCS Discourse forum](https://fenicsproject.discourse.group/) and I am member of the [FEniCS Steering Council](https://github.com/FEniCS/governance/blob/master/governance.md#steering-council).
 
 
 From 2019-2022 I worked as a Postdoctoral Research Associate at the University of Cambridge, working on the ASiMoV project, working with [Chris Richardson](http://www.bpi.cam.ac.uk/user/chris) and [Garth Wells](http://www3.eng.cam.ac.uk/~gnw20/) on the [ASiMoV](https://gow.epsrc.ukri.org/NGBOViewGrant.aspx?GrantRef=EP/S005072/1)-project. The main goal of this project was to do the worlds first, high fidelity simulation of a complete gas-turbine engine during operation, simultaneously including the effects of thermo-mechanics, electromagnetics, and CFD. My main focus during this project was contact mechanics, multi-point constraints and large scale simulations with MPI.
+
+From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Shape Optimization with Finite Element Methods.
 
 <br style="clear:both">
 
