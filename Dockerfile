@@ -47,9 +47,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN cd / && \
-    find -iname "*HDF5*.so"
-
 RUN dpkgArch="$(dpkg --print-architecture)"; \
     case "$dpkgArch" in amd64) \
     HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
@@ -58,7 +55,7 @@ RUN dpkgArch="$(dpkg --print-architecture)"; \
 RUN dpkgArch="$(dpkg --print-architecture)"; \
     case "$dpkgArch" in arm) \
     echo $dkpkgArch \
-    HDF5_DIR="/usr/lib/arm/hdf5/mpich/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
+    HDF5_DIR="/usr/lib/aarch64-linux-gnu/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
     esac;
 
 RUN python3 -m pip install meshio
