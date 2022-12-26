@@ -3,7 +3,7 @@
 # Authors:
 # Jørgen S. Dokken <dokken92@gmail.com>
 
-FROM ubuntu:22.04 as pygmsh-env
+FROM ubuntu:22.04
 
 WORKDIR /tmp
 
@@ -12,6 +12,9 @@ ARG MAKEFLAGS
 ARG GMSH_VERSION="4.11.1"
 ARG PYGMSH_VERSION="7.1.17"
 ARG MESHIO_VERSION="5.3.4"
+
+ENV HDF5_MPI="ON"
+ENV HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/"
 
 # First dependencies are general dependencies
 # Second set are GMSH deps
@@ -25,27 +28,29 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     lib${MPI}-dev \
     pkg-config \
     libxft2 \
-    python3-pip &&\
-    apt-get -y install \
+    python3-pip 
+
+RUN apt-get -y install \
     doxygen \
     git \
     graphviz \
     sudo \
     valgrind \
-    wget && \
-    apt-get -y install \
+    wget
+
+RUN apt-get -y install \
     libglu1 \
     libxcursor-dev \
     libxinerama1 \
     libgl-dev \
-    libxft2 && \
-    apt-get -y install \
+    libxft2
+
+RUN apt-get -y install \
     python3-lxml && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
-RUN HDF5_MPI="ON" HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/" CC=mpicc python3 -m pip install --no-cache-dir --no-binary=h5py h5py
+RUN CC=mpicc python3 -m pip install --no-cache-dir --no-binary=h5py h5py
 RUN python3 -m pip install meshio
 
 # Meshio python deps via pip
