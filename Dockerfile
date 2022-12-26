@@ -12,7 +12,8 @@ ARG MAKEFLAGS
 ARG GMSH_VERSION="4.11.1"
 ARG PYGMSH_VERSION="7.1.17"
 ARG MESHIO_VERSION="5.3.4"
-
+ARG HDF5_SERIES=1.13
+ARG HDF5_PATCH=1
 ENV HDF5_MPI="ON"
 
 
@@ -24,7 +25,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get -yq --with-new-pkgs -o Dpkg::Options::="--force-confold" upgrade && \
     apt-get -y install \
     python3-dev \
-    libhdf5-${MPI}-dev \
     lib${MPI}-dev \
     pkg-config \
     libxft2 \
@@ -47,25 +47,38 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN dpkgArch="$(dpkg --print-architecture)"; \
-    case "$dpkgArch" in amd64) \
-    HDF5_DIR="/usr/lib/x86_64-linux-gnu/hdf5/mpich/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
-    esac;
+# Install HDF5
+RUN wget -nc --quiet https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_SERIES}/hdf5-${HDF5_SERIES}.${HDF5_PATCH}/src/hdf5-${HDF5_SERIES}.${HDF5_PATCH}.tar.gz && \
+    tar xfz hdf5-${HDF5_SERIES}.${HDF5_PATCH}.tar.gz && \
+    cmake -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release -DHDF5_ENABLE_PARALLEL=on -DHDF5_ENABLE_Z_LIB_SUPPORT=on -B build-dir -S hdf5-${HDF5_SERIES}.${HDF5_PATCH} && \
+    cmake --build build-dir && \
+    cmake --install build-dir && \
+    rm -rf /tmp/*
 
-RUN dpkgArch="$(dpkg --print-architecture)"; \
-    case "$dpkgArch" in arm) \
-    echo $dkpkgArch \
-    HDF5_DIR="/usr/lib/aarch64-linux-gnu/" CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py ;; \
-    esac;
+# Install h5py
+RUN CC=mpicc python3 -m pip install -v --no-cache-dir --no-binary=h5py h5py
 
+# Install GMSH
+RUN git clone -b gmsh_${GMSH_VERSION} --single-branch --depth 1 https://gitlab.onelab.info/gmsh/gmsh.git && \
+    cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DENABLE_BUILD_DYNAMIC=1  -DENABLE_OPENMP=1 -B build-dir -S gmsh && \
+    cmake --build build-dir && \
+    cmake --install build-dir && \
+    rm -rf /tmp/*
+
+# GMSH installs python library in /usr/local/lib, see: https://gitlab.onelab.info/gmsh/gmsh/-/issues/1414
+ENV PYTHONPATH=/usr/local/lib:$PYTHONPATH
+
+# Install meshio
 RUN python3 -m pip install meshio
 
-# Meshio python deps via pip
-RUN python3 -m pip install pygmsh==${PYGMSH_VERSION} mpi4py && \
-    python3 -m pip install gmsh==${GMSH_VERSION}
+
+# Install PYGMSH
+RUN python3 -m pip install pygmsh==${PYGMSH_VERSION}
+
+# Install MPI4py
+RUN python3 -m pip install h5py
 
 ENV PATH=$PATH:/usr/local/bin
-ENV PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.10/site-packages/gmsh-${GMSH_VERSION}-Linux64-sdk/lib/
 WORKDIR /root
 
 # Install jupytext
