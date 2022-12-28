@@ -23,11 +23,11 @@ In this tutorial, you will learn:
 
 This tutorial can be downloaded as a [Python-file](pygmsh_tutorial.py) or as a [Jupyter notebook](pygmsh_tutorial.ipynb)
 
-Prerequisites for this tutorial is to install [pygmsh](https://pypi.org/project/pygmsh), [meshio](https://pypi.org/project/meshio) and [gmsh](https://gmsh.info/bin/Linux/gmsh-4.10.3-Linux64.tgz). All of these dependencies can be found in the docker image
-`dokken92/pygmsh`, which can be ran on any computer with docker using 
+Prerequisites for this tutorial is to install [pygmsh](https://pypi.org/project/pygmsh), [meshio](https://pypi.org/project/meshio) and [gmsh](https://gmsh.info/bin/Linux/gmsh-4.11.1-Linux64.tgz). All of these dependencies can be found in the docker image
+`ghcr.io/jorgensd/jorgensd.github.io:main`, which can be ran on any computer with docker using 
 
 ```bash
-docker run -v $(pwd):/root/shared -ti -w "/root/shared" --rm dokken92/pygmsh
+docker run -v $(pwd):/root/shared -ti -w "/root/shared" --rm ghcr.io/jorgensd/jorgensd.github.io:main
 ```
 
 ## <a name="first"></a> 1. How to create a mesh with pygmsh

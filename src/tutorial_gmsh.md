@@ -14,7 +14,7 @@ jupyter:
 ---
 
 # Using the GMSH Python API to generate complex meshes
-In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `dokken92/pygmsh` docker images, as described in the [pygmsh tutorial](tutorial_pygmsh.md).
+In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `ghcr.io/jorgensd/jorgensd.github.io:main` docker image, as described in the [pygmsh tutorial](tutorial_pygmsh.md).
 
 For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab:v0.5.1` and a normal docker image with `dolfinx/dolfinx:v0.5.1`.
 
