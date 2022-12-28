@@ -1,5 +1,7 @@
 theme: jekyll-theme-tactile
 title: Jørgen S. Dokken
+description: Personal webpage
+url: https://jorgensd.github.io/
 
 titles_from_headings:
   enabled:     true
