@@ -16,13 +16,14 @@ title: Papers
 %}
 
 {% include _paper.html
-    id="arbes2022modred"
-    author = "Arbes, Florian and Jensen, Øyvind and Mardal, Kent-Andre and Dokken, Jørgen S.
-    title="Model order reduction of solidification problems"
-    year= "2022"
+    id = "arbes2022modred"
+    author = "Arbes, Florian and Jensen, Øyvind and Mardal, Kent-Andre and Dokken, Jørgen S."
+    title = "Model order reduction of solidification problems"
+    year = "2022"
     arxiv = "2210.06169"
     bib = "arbes2022modred.bib"
 %}
+
 
 ## 2020
 {% include _paper.html
