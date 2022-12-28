@@ -1,7 +1,8 @@
 ---
 title: Papers
 ---
-## 2022{% include _paper.html
+## 2022
+{% include _paper.html
     id="scroggs2022dofs"
     author = "Scroggs, Matthew W. and Dokken, Jørgen S. and Richardson, Chris N. and Wells, Garth N."
     title = "Construction of Arbitrary Order Finite Element Degree-of-Freedom Maps on Polygonal and Polyhedral Cell Meshes"
@@ -15,13 +16,14 @@ title: Papers
 %}
 
 {% include _paper.html
-    id="arbes2022modred",
-    author = "Arbes, Florian and Jensen, Øyvind and Mardal, Kent-Andre and Dokken, Jørgen S.
-    title="Model order reduction of solidification problems"
-    year= "2022"
+    id = "arbes2022modred"
+    author = "Arbes, Florian and Jensen, Øyvind and Mardal, Kent-Andre and Dokken, Jørgen S."
+    title = "Model order reduction of solidification problems"
+    year = "2022"
     arxiv = "2210.06169"
     bib = "arbes2022modred.bib"
 %}
+
 
 ## 2020
 {% include _paper.html
