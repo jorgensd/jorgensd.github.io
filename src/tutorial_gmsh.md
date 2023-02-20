@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -16,7 +16,7 @@ jupyter:
 # Using the GMSH Python API to generate complex meshes
 In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `ghcr.io/jorgensd/jorgensd.github.io:main` docker image, as described in the [pygmsh tutorial](tutorial_pygmsh.md).
 
-For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab:v0.5.1` and a normal docker image with `dolfinx/dolfinx:v0.5.1`.
+For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab:v0.6.0-r1` and a normal docker image with `dolfinx/dolfinx:v0.6.0-r1`.
 
 This tutorial can be downloaded as a [Python-file](tutorial_gmsh.py) or as a [Jupyter notebook](tutorial_gmsh.ipynb).
 
@@ -249,7 +249,7 @@ As the meshes can contain markers for the cells or any sub entity, the next snip
 
 ```python
 from dolfinx.cpp.graph import AdjacencyList_int32
-from dolfinx.cpp.io import distribute_entity_data
+from dolfinx.io import distribute_entity_data
 from dolfinx.cpp.mesh import cell_entity_type, create_meshtags
 
 # Create MeshTags for cell data
