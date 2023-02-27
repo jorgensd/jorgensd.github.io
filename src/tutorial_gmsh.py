@@ -8,7 +8,7 @@
 #       format_version: '1.5'
 #       jupytext_version: 1.14.4
 #   kernelspec:
-#     display_name: Python 3 (ipykernel)
+#     display_name: Python 3
 #     language: python
 #     name: python3
 # ---
@@ -208,14 +208,15 @@ mesh = create_mesh(MPI.COMM_SELF, cells, x, ufl_domain)
 # +
 from dolfinx.cpp.graph import AdjacencyList_int32
 from dolfinx.io import distribute_entity_data
-from dolfinx.cpp.mesh import cell_entity_type, create_meshtags
+from dolfinx.cpp.mesh import cell_entity_type
+from dolfinx.mesh import meshtags_from_entities
 
 # Create MeshTags for cell data
 cell_values = numpy.asarray(topologies[cell_id]["cell_data"], dtype=numpy.int32)
 local_entities, local_values = distribute_entity_data(mesh, mesh.topology.dim, cells, cell_values)
 mesh.topology.create_connectivity(mesh.topology.dim, 0)
 adj = AdjacencyList_int32(local_entities)
-ct = create_meshtags(mesh, mesh.topology.dim, adj, local_values)
+ct = meshtags_from_entities(mesh, mesh.topology.dim, adj, local_values)
 ct.name = "Cell tags"
 
 # Create MeshTags for facets
@@ -231,7 +232,7 @@ marked_facets = marked_facets[:, gmsh_facet_perm]
 local_entities, local_values = distribute_entity_data(mesh, mesh.topology.dim - 1, marked_facets, facet_values)
 mesh.topology.create_connectivity(mesh.topology.dim - 1, mesh.topology.dim)
 adj = AdjacencyList_int32(local_entities)
-ft = create_meshtags(mesh, mesh.topology.dim - 1, adj, local_values)
+ft = meshtags_from_entities(mesh, mesh.topology.dim - 1, adj, local_values)
 ft.name = "Facet tags"
 
 # Output DOLFINx meshes to file
