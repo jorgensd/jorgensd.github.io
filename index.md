@@ -3,6 +3,7 @@
 Welcome to my personal web-page. Here you can find information about me, and the projects I have been working on during my post-graduate studies.
 
 # Latest news
+- A Python implementation for checkpointing in DOLFINx is available at [adios4dolfinx](https://github.com/jorgensd/adios4dolfinx)
 - A web resource for reproducible research available at [scientificcomputing@github](https://scientificcomputing.github.io/) 
 - [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2022dofs) open-access publication at [TOMS](https://doi.org/10.1145/3524456).
 - The [DOLFINx tutorial](https://jorgensd.github.io/dolfinx-tutorial/) v0.4.1 has been released. 
