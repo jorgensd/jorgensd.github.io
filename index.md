@@ -3,6 +3,7 @@
 Welcome to my personal web-page. Here you can find information about me, and the projects I have been working on during my post-graduate studies.
 
 # Latest news
+- The presentation from [FEniCS 23](https://fenicsproject.org/fenics-2023/) on checkpointing is available at [checkpointing-presentation](https://www.jsdokken.com/checkpointing-presentation/#/). The code is available at [jorgensd/checkpointing-presentation](https://github.com/jorgensd/checkpointing-presentation/)
 - A Python implementation for checkpointing in DOLFINx is available at [adios4dolfinx](https://github.com/jorgensd/adios4dolfinx)
 - A web resource for reproducible research available at [scientificcomputing@github](https://scientificcomputing.github.io/) 
 - [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2022dofs) open-access publication at [TOMS](https://doi.org/10.1145/3524456).
