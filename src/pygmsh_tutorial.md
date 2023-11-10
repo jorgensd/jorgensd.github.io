@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.1
+      jupytext_version: 1.15.2
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -24,7 +24,7 @@ In this tutorial, you will learn:
 This tutorial can be downloaded as a [Python-file](pygmsh_tutorial.py) or as a [Jupyter notebook](pygmsh_tutorial.ipynb)
 
 Prerequisites for this tutorial is to install [pygmsh](https://pypi.org/project/pygmsh), [meshio](https://pypi.org/project/meshio) and [gmsh](https://gmsh.info/bin/Linux/gmsh-4.11.1-Linux64.tgz). All of these dependencies can be found in the docker image
-`ghcr.io/jorgensd/jorgensd.github.io:main`, which can be ran on any computer with docker using 
+`ghcr.io/jorgensd/jorgensd.github.io:main`, which can be ran on any computer with docker using
 
 ```bash
 docker run -v $(pwd):/root/shared -ti -w "/root/shared" --rm ghcr.io/jorgensd/jorgensd.github.io:main
@@ -38,6 +38,9 @@ First we create an empty geometry and the circular obstacle:
 <!-- #endregion -->
 
 ```python
+import numpy
+import meshio
+import gmsh
 import pygmsh
 resolution = 0.01
 # Channel parameters
@@ -76,8 +79,8 @@ plane_surface = model.add_plane_surface(
 model.synchronize()
 ```
 
-The final step before mesh generation is to mark the different boundaries and the volume mesh. Note that with pygmsh, boundaries with the same tag has to be added simultaneously. In this example this means that we have to add the top and 
- bottom wall in one function call. 
+The final step before mesh generation is to mark the different boundaries and the volume mesh. Note that with pygmsh, boundaries with the same tag has to be added simultaneously. In this example this means that we have to add the top and
+ bottom wall in one function call.
 
 ```python
 volume_marker = 6
@@ -92,30 +95,29 @@ We generate the mesh using the pygmsh function `generate_mesh`. Generate mesh re
 
 ```python
 geometry.generate_mesh(dim=2)
-import gmsh
 gmsh.write("mesh.msh")
 gmsh.clear()
 geometry.__exit__()
 ```
 
-## <a name="second"></a>2. How to convert your mesh to XDM
-Now that we have save the mesh to a `msh` file, we would like to convert it to a format that interfaces with DOLFIN and DOLFINx. 
+## <a name="second"></a>2. How to convert your mesh to XDMF
+Now that we have save the mesh to a `msh` file, we would like to convert it to a format that interfaces with DOLFIN and DOLFINx.
 For this I suggest using the `XDMF`-format as it supports parallel IO.
 
 ```python
-import meshio
 mesh_from_file = meshio.read("mesh.msh")
 ```
 
 Now that we have loaded the mesh, we need to extract the cells and physical data. We need to create a separate file for the facets (lines), which we will use when we define boundary conditions in DOLFIN/DOLFINx. We do this with the following convenience function. Note that as we would like a 2 dimensional mesh, we need to remove the z-values in the mesh coordinates.
 
+
 ```python
-import numpy
 def create_mesh(mesh, cell_type, prune_z=False):
     cells = mesh.get_cells_type(cell_type)
     cell_data = mesh.get_cell_data("gmsh:physical", cell_type)
-    points = mesh.points[:,:2] if prune_z else mesh.points
-    out_mesh = meshio.Mesh(points=points, cells={cell_type: cells}, cell_data={"name_to_read":[cell_data]})
+    points = mesh.points[:, :2] if prune_z else mesh.points
+    out_mesh = meshio.Mesh(points=points, cells={cell_type: cells}, cell_data={
+                           "name_to_read": [cell_data]})
     return out_mesh
 ```
 
@@ -141,12 +143,12 @@ We start by importing this kernel, and creating three objects:
 mesh_size = 0.1
 geom = pygmsh.occ.Geometry()
 model3D = geom.__enter__()
-box0 =  model3D.add_box([0.0, 0, 0], [1, 1, 1])
-box1 =  model3D.add_box([0.5, 0.5, 1], [0.5, 0.5, 1])
+box0 = model3D.add_box([0.0, 0, 0], [1, 1, 1])
+box1 = model3D.add_box([0.5, 0.5, 1], [0.5, 0.5, 1])
 ball = model3D.add_ball([0.5, 0.5, 0.5], 0.25)
 ```
 
-In this demo, we would like to make a mesh that is the union of these three objects. 
+In this demo, we would like to make a mesh that is the union of these three objects.
 In addition, we would like the internal boundary of the sphere to be preserved in the final mesh.
 We will do this by using boolean operations. First we make a `boolean_union` of the two boxes (whose internal boundaries will not be preserved). Then, we use boolean fragments to perserve the outer boundary of the sphere.
 
@@ -176,7 +178,3 @@ These XDMF-files  can be visualized in Paraview and looks like
 ![The 2D mesh and the corresponding facet data visualized in Paraview](../assets/img/mesh2D.png)
 
 We use the same strategy for the 3D mesh as the 2D mesh.
-
-```python
-
-```

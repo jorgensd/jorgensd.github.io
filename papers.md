@@ -1,7 +1,23 @@
 ---
 title: Papers
 ---
+
+## 2023
+
+{% include _paper.html
+    id="Laughlin2023smart"
+    author = "Justin G. Laughlin and Jørgen S. Dokken and Henrik N.t. Finsberg and Emmet A. Francis and Christopher T. Lee and Marie E. Rognes and Padmini Rangamani"
+    title = "SMART: Spatial Modeling Algorithms for Reactions and Transport"
+    number = "90"
+    volume = "8"
+    doi = "10.21105/joss.05580"
+    year = "2023"
+    journal = "Journal of Open Source Software"
+    bib = "Laughlin2023smart.bib"
+%}
+
 ## 2022
+
 {% include _paper.html
     id="scroggs2022dofs"
     author = "Scroggs, Matthew W. and Dokken, Jørgen S. and Richardson, Chris N. and Wells, Garth N."
@@ -24,8 +40,8 @@ title: Papers
     bib = "arbes2022modred.bib"
 %}
 
-
 ## 2020
+
 {% include _paper.html
     id="dokken2020navier"
 	author = "J. S. Dokken and A. Johansson and A. Massing and S. W. Funke"
@@ -48,8 +64,8 @@ title: Papers
     bib = "dokken2020shape.bib"
 %}
 
-
 ## 2019
+
 {% include _paper.html
     id="dokken2019shape"
     author="J. S. Dokken, S. W. Funke, A.Johansson, S.Schmidt"
@@ -80,6 +96,7 @@ title: Papers
 %}
 
 ## 2017
+
 {% include _paper.html
     id="dokken2017linear"
 	author = "J. S. Dokken and J. Grue and L. P. Karstensen"
@@ -131,4 +148,3 @@ For related research, have a look at my [Google scholar page](https://scholar.go
     pdf = "https://www.duo.uio.no/bitstream/handle/10852/51950/masteroppgave_jorgen_schartum_dokken.pdf?sequence=1&isAllowed=y"
     bib = "dokken2016thesis.bib"
 %}
-
