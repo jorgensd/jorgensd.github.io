@@ -6,7 +6,7 @@ title: Papers
 
 {% include _paper.html
     id = "dolfinx2023preprint"
-    author = "Baratta, Igor A. and Dean, Joseph P. and Dokken, Jørgen S. and Habera, Michal and Hale, Jack S. and Richardson, Chris N. and Rognes, Marie E. and Scroggs, Matthew W. and Sime, Nathan and Wells, Garth N.
+    author = "Baratta, Igor A. and Dean, Joseph P. and Dokken, Jørgen S. and Habera, Michal and Hale, Jack S. and Richardson, Chris N. and Rognes, Marie E. and Scroggs, Matthew W. and Sime, Nathan and Wells, Garth N."
     title = "DOLFINx: The next generation FEniCS problem solving environment"
     month = "dec"
     year = "2023"
