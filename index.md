@@ -29,7 +29,7 @@ Welcome to my personal web-page. Here you can find information about me, and the
 
 # About me
 
-I am currently employed at [Simula Research Laboratory](https://www.simula.no/people/dokken) as a Research Engineer. I am also one of the adminstrators of the [FEniCS Discourse forum](https://fenicsproject.discourse.group/) and I am member of the [FEniCS Steering Council](https://github.com/FEniCS/governance/blob/master/governance.md#steering-council).
+I am currently employed at [Simula Research Laboratory](https://www.simula.no/people/dokken) as a Senior Research Engineer. I am also one of the administrators of the [FEniCS Discourse forum](https://fenicsproject.discourse.group/) and I am member of the [FEniCS Steering Council](https://github.com/FEniCS/governance/blob/master/governance.md#steering-council).
 
 From 2019-2022 I worked as a Postdoctoral Research Associate at the University of Cambridge, working on the ASiMoV project, working with [Chris Richardson](http://www.bpi.cam.ac.uk/user/chris) and [Garth Wells](http://www3.eng.cam.ac.uk/~gnw20/) on the [ASiMoV](https://gow.epsrc.ukri.org/NGBOViewGrant.aspx?GrantRef=EP/S005072/1)-project. The main goal of this project was to do the worlds first, high fidelity simulation of a complete gas-turbine engine during operation, simultaneously including the effects of thermo-mechanics, electromagnetics, and CFD. My main focus during this project was contact mechanics, multi-point constraints and large scale simulations with MPI.
 
