@@ -42,14 +42,15 @@ From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Sha
 I am involved in the development of the following software:
 ![The FEniCS logo](assets/img/fenics_logo.png){: .image-right }
 
-- [dolfinx](https://github.com/FEniCS/dolfinx) - The next generation FEniCS problem solving environment
+- [The FEniCS project](https://bitbucket.org/fenics-project/) - An open-source computing platform for solving partial differential equations using the finite element method. End-user and core development resulting in the following papers and preprints
+
+  - [DOLFINx: The next generation FEniCS problem solving environment](papers.md#dolfinx2023preprint)
   - [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2022dofs)
-- [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc)- An extension to DOLFINx supporting multi-point constraints (such as contact and slip conditions)
-- [The FEniCS project](https://bitbucket.org/fenics-project/) - An open-source computing platform for solving partial differential equations using the finite element method. My main focus in this software was the multimesh finite element method, resulting in the following papers:
   - [A multimesh finite element method for the Navier--Stokes equations based on projection methods](papers.md#dokken2020navier)
   - [Shape Optimization Using the Finite Element Method on Multiple Meshes with Nitsche Coupling](papers.md#dokken2019shape)
-- [dolfin-adjoint](http://www.dolfin-adjoint.org/en/latest/) - An algorithmic differentiation tool using
-  [pyadjoint](https://github.com/dolfin-adjoint/pyadjoint) to differentiate FEM models written in [Dolfin](https://bitbucket.org/fenics-project/dolfin/src/master/) and [Firedrake](https://www.firedrakeproject.org/). The contributions here have resulted in one published paper and one preprint
+
+- [Dolfin-adjoint](https://dolfin-adjoint.github.io/dolfin-adjoint/) - An algorithmic differentiation tool using [pyadjoint](https://github.com/dolfin-adjoint/pyadjoint) to differentiate FEM models written in [Dolfin](https://bitbucket.org/fenics-project/dolfin/src/master/) and [Firedrake](https://www.firedrakeproject.org/). The contributions here have resulted in the following papers and preprints
   - [Automatic shape derivatives for transient PDEs in FEniCS and Firedrake](papers.md#dokken2020shape)
   - [dolfin-adjoint 2018.1: automated adjoints for FEniCS and Firedrake](papers.md#mitusch2019pyadjoint)
 - [Scientific Computing @ Simula](https://scientificcomputing.github.io/) A web resource for best software practices for academics using Python
+- [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc) - An extension to DOLFINx supporting multi-point constraints (such as contact and slip conditions)
