@@ -5,6 +5,16 @@ title: Papers
 ## 2023
 
 {% include _paper.html
+    id = "dolfinx2023preprint"
+    author = "Baratta, Igor A. and Dean, Joseph P. and Dokken, Jørgen S. and Habera, Michal and Hale, Jack S. and Richardson, Chris N. and Rognes, Marie E. and Scroggs, Matthew W. and Sime, Nathan and Wells, Garth N."
+    title = "DOLFINx: The next generation FEniCS problem solving environment"
+    month = "dec"
+    year = "2023"
+    publisher = "Zenodo"
+    doi = "10.5281/zenodo.10447666"
+%}
+
+{% include _paper.html
     id="Laughlin2023smart"
     author = "Justin G. Laughlin and Jørgen S. Dokken and Henrik N.t. Finsberg and Emmet A. Francis and Christopher T. Lee and Marie E. Rognes and Padmini Rangamani"
     title = "SMART: Spatial Modeling Algorithms for Reactions and Transport"
