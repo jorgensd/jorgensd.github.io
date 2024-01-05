@@ -12,6 +12,7 @@ title: Papers
     year = "2023"
     publisher = "Zenodo"
     doi = "10.5281/zenodo.10447666"
+    bib = "dolfinx2023preprint.bib"
 %}
 
 {% include _paper.html
