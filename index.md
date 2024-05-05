@@ -5,6 +5,7 @@ Welcome to my personal web-page. Here you can find information about me, and the
 # Latest news
 
 ## 2024
+- I am organizing the FEniCS 24 conference at Simula Research Laboratory June 12th-14th in Oslo Norway. See: [https://fenicsproject.org/fenics-2024/](https://fenicsproject.org/fenics-2024/) for details
 - v0.8.0 of the DOLFINx tutorial have been published
 - **New paper published**: [https://joss.theoj.org/papers/10.21105/joss.06451](https://joss.theoj.org/papers/10.21105/joss.06451) for details
 - Online panelist at the DOEPy meetup (April 24th), see: [The Python Exchange](https://meetup.doepy.org/) for details.
