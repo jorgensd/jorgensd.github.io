@@ -4,6 +4,11 @@ Welcome to my personal web-page. Here you can find information about me, and the
 
 # Latest news
 
+## 2024
+- v0.8.0 of the DOLFINx tutorial have been published
+- **New paper published**: [https://joss.theoj.org/papers/10.21105/joss.06451](https://joss.theoj.org/papers/10.21105/joss.06451) for details
+- Online panelist at the DOEPy meetup (April 24th), see: [The Python Exchange](https://meetup.doepy.org/) for details.
+
 ## 2023
 
 - **New preprint**: [DOLFINx: The next generation FEniCS problem solving environment](papers.md#dolfinx2023preprint) available at [DOI:10.5281/zenodo.10447666](https://doi.org/10.5281/zenodo.10447666)

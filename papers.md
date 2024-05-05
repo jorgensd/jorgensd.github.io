@@ -2,6 +2,24 @@
 title: Papers
 ---
 
+## 2024
+
+{% include _paper.html
+id = "adios4dolfinx"
+author = "Dokken, Jørgen S."
+title = "ADIOS4DOLFINx: A framework for checkpointing in FEniCS"
+month = "apr"
+year = "2024"
+publisher = "Journal of Open Source Software"
+doi = "10.21105/joss.06451"
+number = "96"
+volume = "9"
+year = "2024"
+bib = "dokken2024adios.bib"
+
+}
+
+
 ## 2023
 
 {% include _paper.html
