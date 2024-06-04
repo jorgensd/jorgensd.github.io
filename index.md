@@ -1,6 +1,6 @@
 ![Image of J.S.Dokken](assets/img/cropped.jpg){: .image-left }
 
-  # About me
+# About me
 
 I am currently employed at [Simula Research Laboratory](https://www.simula.no/people/dokken) as a Senior Research Engineer. I am also one of the administrators of the [FEniCS Discourse forum](https://fenicsproject.discourse.group/) and I am member of the [FEniCS Steering Council](https://github.com/FEniCS/governance/blob/master/governance.md#steering-council).
 
@@ -23,7 +23,7 @@ From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Sha
 
 - **New preprint**: [DOLFINx: The next generation FEniCS problem solving environment](papers.md#dolfinx2023preprint) available at [DOI:10.5281/zenodo.10447666](https://doi.org/10.5281/zenodo.10447666)
 - **New tutorial**: FEniCSx tutorial for students enrolled in the class MU5MES01 of the _Solid Mechanics Master of Sorbonne Université and ENPC_. The tutorial is available at [http://jsdokken.com/FEniCS23-tutorial/](http://jsdokken.com/FEniCS23-tutorial/)
-- Presentation at d'Alembert institute on my research _Boundary condition extensions in FEniCSx_, See [the D'Alembert YouTube channel](https://www.youtube.com/watch?v=4LSWOdyiGH8) for the full presentation
+- Presentation at d'Alembert institute on my research _Boundary condition extensions in FEniCSx_, See [the D'Alembert YouTube channel](lectures.md#DAlembert) for the full presentation
 - The presentation from [FEniCS 23](https://fenicsproject.org/fenics-2023/) on checkpointing is available at [checkpointing-presentation](https://www.jsdokken.com/checkpointing-presentation/#/). The code is available at [jorgensd/checkpointing-presentation](https://github.com/jorgensd/checkpointing-presentation/)
 - **New paper published**: See: [https://joss.theoj.org/papers/10.21105/joss.05580#](https://joss.theoj.org/papers/10.21105/joss.05580#) for details
 - A Python implementation for checkpointing in DOLFINx is available at [adios4dolfinx](https://github.com/jorgensd/adios4dolfinx)
