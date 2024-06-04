@@ -5,6 +5,17 @@ title: Papers
 ## 2024
 
 {% include _paper.html
+id = "smart_preprint"
+    author = "Emmet A. Francis and Justin G. Laughlin and Jørgen S. Dokken and Henrik N. T. Finsberg and Christopher T. Lee and Marie E. Rognes and Padmini Rangamani"
+    title = "Spatial modeling algorithms for reactions and transport (SMART) in biological cells"
+    month = "may"
+    year = "2024"
+    arxiv = "2405.15968"
+    bib = "francis2024preprint.bib"
+%}
+
+
+{% include _paper.html
 id = "adios4dolfinx"
     author = "Dokken, Jørgen S."
     title = "ADIOS4DOLFINx: A framework for checkpointing in FEniCS"

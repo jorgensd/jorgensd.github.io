@@ -1,10 +1,9 @@
 ![Image of J.S.Dokken](assets/img/cropped.jpg){: .image-left }
 
-Welcome to my personal web-page. Here you can find information about me, and the projects I have been working on during my post-graduate studies.
-
 # Latest news
 
 ## 2024
+- **New preprint**: [Spatial modeling algorithms for reactions and transport (SMART) in biological cells](papers.md#smart_preprint) available at: [DOI:10.48550/arXiv.2405.15968](https://doi.org/10.48550/arXiv.2405.15968)
 - I am organizing the FEniCS 24 conference at Simula Research Laboratory June 12th-14th in Oslo Norway. See: [https://fenicsproject.org/fenics-2024/](https://fenicsproject.org/fenics-2024/) for details
 - v0.8.0 of the DOLFINx tutorial have been published
 - **New paper published**: [https://joss.theoj.org/papers/10.21105/joss.06451](https://joss.theoj.org/papers/10.21105/joss.06451) for details
@@ -60,3 +59,4 @@ I am involved in the development of the following software:
   - [dolfin-adjoint 2018.1: automated adjoints for FEniCS and Firedrake](papers.md#mitusch2019pyadjoint)
 - [Scientific Computing @ Simula](https://scientificcomputing.github.io/) A web resource for best software practices for academics using Python
 - [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc) - An extension to DOLFINx supporting multi-point constraints (such as contact and slip conditions)
+- [adios4dolfinx](papers.md#adios4dolfinx)
