@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.14.1
+#       jupytext_version: 1.16.2
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -36,10 +36,10 @@
 # First we create an empty geometry and the circular obstacle:
 
 # +
-import numpy
 import meshio
 import gmsh
 import pygmsh
+
 resolution = 0.01
 # Channel parameters
 L = 2.2
@@ -59,19 +59,21 @@ circle = model.add_circle(c, r, mesh_size=resolution)
 
 # +
 # Add points with finer resolution on left side
-points = [model.add_point((0, 0, 0), mesh_size=resolution),
-          model.add_point((L, 0, 0), mesh_size=5*resolution),
-          model.add_point((L, H, 0), mesh_size=5*resolution),
-          model.add_point((0, H, 0), mesh_size=resolution)]
+points = [
+    model.add_point((0, 0, 0), mesh_size=resolution),
+    model.add_point((L, 0, 0), mesh_size=5 * resolution),
+    model.add_point((L, H, 0), mesh_size=5 * resolution),
+    model.add_point((0, H, 0), mesh_size=resolution),
+]
 
 # Add lines between all points creating the rectangle
-channel_lines = [model.add_line(points[i], points[i+1])
-                 for i in range(-1, len(points)-1)]
+channel_lines = [
+    model.add_line(points[i], points[i + 1]) for i in range(-1, len(points) - 1)
+]
 
 # Create a line loop and plane surface for meshing
 channel_loop = model.add_curve_loop(channel_lines)
-plane_surface = model.add_plane_surface(
-    channel_loop, holes=[circle.curve_loop])
+plane_surface = model.add_plane_surface(channel_loop, holes=[circle.curve_loop])
 
 # Call gmsh kernel before add physical entities
 model.synchronize()
@@ -107,8 +109,9 @@ def create_mesh(mesh, cell_type, prune_z=False):
     cells = mesh.get_cells_type(cell_type)
     cell_data = mesh.get_cell_data("gmsh:physical", cell_type)
     points = mesh.points[:, :2] if prune_z else mesh.points
-    out_mesh = meshio.Mesh(points=points, cells={cell_type: cells}, cell_data={
-                           "name_to_read": [cell_data]})
+    out_mesh = meshio.Mesh(
+        points=points, cells={cell_type: cells}, cell_data={"name_to_read": [cell_data]}
+    )
     return out_mesh
 
 

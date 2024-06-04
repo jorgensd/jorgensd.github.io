@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.15.2
+      jupytext_version: 1.16.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -16,7 +16,7 @@ jupyter:
 # Using the GMSH Python API to generate complex meshes
 In this tutorial, we will use the gmsh API to generate complex meshes. We will in this tutorial learn how to make the 3D mesh used in the [DFG 3D laminar benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_flow3d.html). The [first part](first) of this tutorial can be completed with the `ghcr.io/jorgensd/jorgensd.github.io:main` docker image, as described in the [pygmsh tutorial](tutorial_pygmsh.md).
 
-For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `dolfinx/lab:v0.7.1` and a normal docker image with `dolfinx/dolfinx:v0.7.1`.
+For the [second](second) and [third](third) part of the tutorial, `dolfinx` is required. You can obtain a jupyter-lab image with `ghcr.io/fenics/dolfinx/lab:v0.8.0` and a normal docker image with `ghcr.io/fenics/dolfinx/dolfinx:v0.8.0`.
 
 This tutorial can be downloaded as a [Python-file](tutorial_gmsh.py) or as a [Jupyter notebook](tutorial_gmsh.ipynb).
 
@@ -40,6 +40,9 @@ from dolfinx.io.gmshio import model_to_mesh
 import numpy as np
 import gmsh
 import warnings
+```
+
+```python
 warnings.filterwarnings("ignore")
 gmsh.initialize()
 ```
@@ -73,7 +76,7 @@ We start by finding the volumes, which after the `cut`-operation is only the flu
 ```python
 gmsh.model.occ.synchronize()
 volumes = gmsh.model.getEntities(dim=3)
-assert (volumes == fluid[0])
+assert volumes == fluid[0]
 fluid_marker = 11
 gmsh.model.addPhysicalGroup(volumes[0][0], [volumes[0][1]], fluid_marker)
 gmsh.model.setPhysicalName(volumes[0][0], fluid_marker, "Fluid volume")
@@ -89,14 +92,19 @@ walls = []
 obstacles = []
 for surface in surfaces:
     com = gmsh.model.occ.getCenterOfMass(surface[0], surface[1])
-    if np.allclose(com, [0, B/2, H/2]):
+    if np.allclose(com, [0, B / 2, H / 2]):
         gmsh.model.addPhysicalGroup(surface[0], [surface[1]], inlet_marker)
         inlet = surface[1]
         gmsh.model.setPhysicalName(surface[0], inlet_marker, "Fluid inlet")
-    elif np.allclose(com, [L, B/2, H/2]):
+    elif np.allclose(com, [L, B / 2, H / 2]):
         gmsh.model.addPhysicalGroup(surface[0], [surface[1]], outlet_marker)
         gmsh.model.setPhysicalName(surface[0], outlet_marker, "Fluid outlet")
-    elif np.isclose(com[2], 0) or np.isclose(com[1], B) or np.isclose(com[2], H) or np.isclose(com[1], 0):
+    elif (
+        np.isclose(com[2], 0)
+        or np.isclose(com[1], B)
+        or np.isclose(com[2], H)
+        or np.isclose(com[1], 0)
+    ):
         walls.append(surface[1])
     else:
         obstacles.append(surface[1])
@@ -123,12 +131,12 @@ LcMin -o---------/
 ```
 
 ```python
-resolution = r/10
+resolution = r / 10
 threshold = gmsh.model.mesh.field.add("Threshold")
 gmsh.model.mesh.field.setNumber(threshold, "IField", distance)
 gmsh.model.mesh.field.setNumber(threshold, "LcMin", resolution)
-gmsh.model.mesh.field.setNumber(threshold, "LcMax", 20*resolution)
-gmsh.model.mesh.field.setNumber(threshold, "DistMin", 0.5*r)
+gmsh.model.mesh.field.setNumber(threshold, "LcMax", 20 * resolution)
+gmsh.model.mesh.field.setNumber(threshold, "DistMin", 0.5 * r)
 gmsh.model.mesh.field.setNumber(threshold, "DistMax", r)
 ```
 
@@ -140,8 +148,8 @@ inlet_dist = gmsh.model.mesh.field.add("Distance")
 gmsh.model.mesh.field.setNumbers(inlet_dist, "FacesList", [inlet])
 inlet_thre = gmsh.model.mesh.field.add("Threshold")
 gmsh.model.mesh.field.setNumber(inlet_thre, "IField", inlet_dist)
-gmsh.model.mesh.field.setNumber(inlet_thre, "LcMin", 5*resolution)
-gmsh.model.mesh.field.setNumber(inlet_thre, "LcMax", 10*resolution)
+gmsh.model.mesh.field.setNumber(inlet_thre, "LcMin", 5 * resolution)
+gmsh.model.mesh.field.setNumber(inlet_thre, "LcMax", 10 * resolution)
 gmsh.model.mesh.field.setNumber(inlet_thre, "DistMin", 0.1)
 gmsh.model.mesh.field.setNumber(inlet_thre, "DistMax", 0.5)
 ```
@@ -150,8 +158,7 @@ We combine these fields by using the minimum field
 
 ```python
 minimum = gmsh.model.mesh.field.add("Min")
-gmsh.model.mesh.field.setNumbers(
-    minimum, "FieldsList", [threshold, inlet_thre])
+gmsh.model.mesh.field.setNumbers(minimum, "FieldsList", [threshold, inlet_thre])
 gmsh.model.mesh.field.setAsBackgroundMesh(minimum)
 ```
 
@@ -187,8 +194,7 @@ However, this means that there is a gmsh mesh on each process. In DOLFINx, we wo
 
 ```python
 model_rank = 0
-mesh, cell_tags, facet_tags = model_to_mesh(
-    gmsh.model, MPI.COMM_WORLD, model_rank)
+mesh, cell_tags, facet_tags = model_to_mesh(gmsh.model, MPI.COMM_WORLD, model_rank)
 ```
 
 This function creates a mesh on processor 0 with GMSH and distributes the mesh data in a `dolfinx.Mesh` for parallel usage. The flags `cell_data` and `facet_data` are booleans that indicates that you would like to extract cell and facet markers from the gmsh model. The last flag `gdim` indicates the geometrical dimension of your mesh, and should be set to `2` if you want to have a 2D geometry.
@@ -214,8 +220,7 @@ cell_dimensions = numpy.zeros(num_cell_types, dtype=numpy.int32)
 for i, element in enumerate(topologies.keys()):
     properties = gmsh.model.mesh.getElementProperties(element)
     name, dim, order, num_nodes, local_coords, _ = properties
-    cell_information[i] = {"id": element, "dim": dim,
-                           "num_nodes": num_nodes}
+    cell_information[i] = {"id": element, "dim": dim, "num_nodes": num_nodes}
     cell_dimensions[i] = dim
 gmsh.finalize()
 
@@ -228,7 +233,7 @@ We extract the topology of the cell with the highest topological dimension from 
 ```python
 cell_id = cell_information[perm_sort[-1]]["id"]
 cells = numpy.asarray(topologies[cell_id]["topology"], dtype=numpy.int64)
-ufl_domain = gmshio.ufl_mesh(cell_id, 3)
+ufl_domain = gmshio.ufl_mesh(cell_id, 3, dtype=x.dtype)
 ```
 
 As the GMSH model has the cell topology ordered as specified in the  [MSH format](http://gmsh.info//doc/texinfo/gmsh.html#Node-ordering),
@@ -252,10 +257,10 @@ As the meshes can contain markers for the cells or any sub entity, the next snip
 ```python
 
 # Create MeshTags for cell data
-cell_values = numpy.asarray(
-    topologies[cell_id]["cell_data"], dtype=numpy.int32)
+cell_values = numpy.asarray(topologies[cell_id]["cell_data"], dtype=numpy.int32)
 local_entities, local_values = distribute_entity_data(
-    mesh, mesh.topology.dim, cells, cell_values)
+    mesh, mesh.topology.dim, cells, cell_values
+)
 mesh.topology.create_connectivity(mesh.topology.dim, 0)
 adj = adjacencylist(local_entities)
 ct = meshtags_from_entities(mesh, mesh.topology.dim, adj, local_values)
@@ -265,17 +270,17 @@ ct.name = "Cell tags"
 # Permute facets from MSH to DOLFINx ordering
 # FIXME: This does not work for prism meshes
 facet_type = cell_entity_type(
-    to_type(str(ufl_domain.ufl_cell())), mesh.topology.dim - 1, 0)
+    to_type(str(ufl_domain.ufl_cell())), mesh.topology.dim - 1, 0
+)
 gmsh_facet_id = cell_information[perm_sort[-2]]["id"]
 num_facet_nodes = cell_information[perm_sort[-2]]["num_nodes"]
 gmsh_facet_perm = perm_gmsh(facet_type, num_facet_nodes)
-marked_facets = numpy.asarray(
-    topologies[gmsh_facet_id]["topology"], dtype=numpy.int64)
-facet_values = numpy.asarray(
-    topologies[gmsh_facet_id]["cell_data"], dtype=numpy.int32)
+marked_facets = numpy.asarray(topologies[gmsh_facet_id]["topology"], dtype=numpy.int64)
+facet_values = numpy.asarray(topologies[gmsh_facet_id]["cell_data"], dtype=numpy.int32)
 marked_facets = marked_facets[:, gmsh_facet_perm]
 local_entities, local_values = distribute_entity_data(
-    mesh, mesh.topology.dim - 1, marked_facets, facet_values)
+    mesh, mesh.topology.dim - 1, marked_facets, facet_values
+)
 mesh.topology.create_connectivity(mesh.topology.dim - 1, mesh.topology.dim)
 adj = adjacencylist(local_entities)
 ft = meshtags_from_entities(mesh, mesh.topology.dim - 1, adj, local_values)
@@ -295,7 +300,8 @@ We will do this by using the convenience function `gmshio.read_from_msh`
 
 ```python
 mesh, cell_tags, facet_tags = gmshio.read_from_msh(
-    "mesh3D.msh", MPI.COMM_WORLD, 0, gdim=3)
+    "mesh3D.msh", MPI.COMM_WORLD, 0, gdim=3
+)
 ```
 
 What this function does, is that it uses the `gmsh.merge` command to create a gmsh model of the msh file and then in turn calls the `gmsh_model_to_mesh` function.

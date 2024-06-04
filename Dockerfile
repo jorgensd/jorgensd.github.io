@@ -3,35 +3,34 @@
 # Authors:
 # Jørgen S. Dokken <dokken92@gmail.com>
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 WORKDIR /tmp
 
 ARG MPI="mpich"
 ARG MAKEFLAGS
-ARG GMSH_VERSION="4_11_1"
+ARG GMSH_VERSION="4_13_1"
 ARG PYGMSH_VERSION="7.1.17"
-ARG MESHIO_VERSION="5.3.4"
-ARG HDF5_SERIES="1.14"
-ARG HDF5_PATCH="2"
-ENV HDF5_MPI="ON"
+ARG MESHIO_VERSION="5.3.5"
 ENV HDF5_DIR="/usr/local"
+ARG HDF5_SERIES=1.14
+ARG HDF5_PATCH=3
+ARG HDF5_FIX=
 
-# First dependencies are general dependencies
+# First dependencies are general build deps dependencies
 # Second set are GMSH deps
 # Third set is meshio deps
-RUN export DEBIAN_FRONTEND=noninteractive && \
-    apt-get -qq update && \
-    apt-get -yq --with-new-pkgs -o Dpkg::Options::="--force-confold" upgrade && \
-    apt-get -y install \
+RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y  \
     python3-dev \
+    python3-pip \
+    python3-venv \
     lib${MPI}-dev \
     pkg-config \
     libxft2 \
     wget \
     cmake \
-    ninja-build \
-    python3-pip &&\
+    ninja-build && \
     apt-get -y install \
     doxygen \
     git \
@@ -49,15 +48,21 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     libgl1-mesa-dev \
     libocct-foundation-dev \
     libocct-data-exchange-dev && \
-    apt-get -y install \
-    python3-lxml && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+ENV VIRTUAL_ENV /pygmsh-env
+ENV PATH /pygmsh-env/bin:$PATH
+RUN python3 -m venv ${VIRTUAL_ENV}
+
 # Install HDF5
-RUN wget -nc --quiet https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_SERIES}/hdf5-${HDF5_SERIES}.${HDF5_PATCH}/src/hdf5-${HDF5_SERIES}.${HDF5_PATCH}.tar.gz && \
-    tar xfz hdf5-${HDF5_SERIES}.${HDF5_PATCH}.tar.gz && \
-    cmake -G Ninja -DCMAKE_INSTALL_PREFIX=${HDF5_DIR} -DCMAKE_BUILD_TYPE=Release -DHDF5_ENABLE_PARALLEL=on -DHDF5_ENABLE_Z_LIB_SUPPORT=on -B build-dir -S hdf5-${HDF5_SERIES}.${HDF5_PATCH} && \
+# Note: HDF5 CMake install has numerous bugs and inconsistencies. Test carefully.
+# HDF5 overrides CMAKE_INSTALL_PREFIX by default, hence it is set
+# below to ensure that HDF5 is installed into a path where it can be
+# found.
+RUN wget -nc --quiet https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_SERIES}/hdf5-${HDF5_SERIES}.${HDF5_PATCH}/src/hdf5-${HDF5_SERIES}.${HDF5_PATCH}${HDF5_FIX}.tar.gz && \
+    tar xfz hdf5-${HDF5_SERIES}.${HDF5_PATCH}${HDF5_FIX}.tar.gz && \
+    cmake -G Ninja -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release -DHDF5_ENABLE_PARALLEL=on -DHDF5_ENABLE_Z_LIB_SUPPORT=on -B build-dir -S hdf5-${HDF5_SERIES}.${HDF5_PATCH}${HDF5_FIX} && \
     cmake --build build-dir && \
     cmake --install build-dir && \
     rm -rf /tmp/*
@@ -76,7 +81,7 @@ RUN git clone -b gmsh_${GMSH_VERSION} --single-branch --depth 1 https://gitlab.o
 ENV PYTHONPATH=/usr/local/lib:$PYTHONPATH
 
 # Install meshio
-RUN python3 -m pip install meshio
+RUN python3 -m pip install meshio==${MESHIO_VERSION}
 
 
 # Install PYGMSH
