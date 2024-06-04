@@ -16,7 +16,7 @@ jobs:
   # This workflow contains a single job called "build"
   test-pygmsh:
     # The type of runner that the job will run on
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     container: ghcr.io/jorgensd/jorgensd.github.io:main
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -36,8 +36,8 @@ jobs:
       #     echo test, and deploy your project.
 
   test-gmsh:
-    runs-on: ubuntu-22.04
-    container: ghcr.io/fenics/dolfinx/dolfinx:v0.7.1
+    runs-on: ubuntu-24.04
+    container: ghcr.io/fenics/dolfinx/dolfinx:stable
     steps:
       - uses: actions/checkout@v4
       - name: Run python scripts
