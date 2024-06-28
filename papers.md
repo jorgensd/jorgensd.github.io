@@ -75,7 +75,7 @@ id = "adios4dolfinx"
     author = "Arbes, Florian and Jensen, Øyvind and Mardal, Kent-Andre and Dokken, Jørgen S."
     title = "Model order reduction of solidification problems"
     year = "2022"
-    arxiv = "2210.06169"
+    doi = "10.23967/eccomas.2022.179"
     bib = "arbes2022modred.bib"
 %}
 
