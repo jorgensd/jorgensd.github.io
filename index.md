@@ -13,6 +13,10 @@ From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Sha
 # Latest news
 
 ## 2024
+
+- **October 21st-22nd**: I will give a two day DOLFINx tutorial at the Plasma Science and Fusion Center @ MIT. Sign up at [here](https://docs.google.com/forms/d/e/1FAIpQLSfqo5uKk0M-Luz0-BySqLDxuuO2DfYuFcoozx3VPuWH06wSqQ/viewform)
+- **October 4th,11th**: I will give two lectures as part of MU5MES01 of the Solid Mechanics of the Solid Mechanics Master of Sorbonne Université and ENPC. See [MU5MES01@Github](https://github.com/msolides-2024/MU5MES01-2024) for more information.
+- **October 1st**: I will give an introduction to the FEniCS library at École des Ponts, Paris. See [Laboratory Navier](https://navier-lab.fr/agenda/seminaire-msa-jorgen-s-dokken/) for more information.
 - **New preprint**: [Spatial modeling algorithms for reactions and transport (SMART) in biological cells](papers.md#smart_preprint) available at: [DOI:10.48550/arXiv.2405.15968](https://doi.org/10.48550/arXiv.2405.15968)
 - I am organizing the FEniCS 24 conference at Simula Research Laboratory June 12th-14th in Oslo Norway. See: [https://fenicsproject.org/fenics-2024/](https://fenicsproject.org/fenics-2024/) for details
 - v0.8.0 of the DOLFINx tutorial have been published
