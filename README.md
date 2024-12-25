@@ -3,6 +3,7 @@ To build the webpage locally, call:
 The prerequisites for building the website can be installed by running:
 ```bash
 apt-get install -y ruby-bundler ruby-dev
+apt-get install -y build-essential gcc make
 bundle install
 ```
 The website can then be built by running:
