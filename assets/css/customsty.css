@@ -154,10 +154,10 @@ p::selection {
 }
 
 a::selection {
-  background-color: rgb(207, 195, 30);
+
 } */
 ::selection {
-  text-decoration: underline dotted;
+  background-color: rgb(208, 0, 0);
 }
 
 .language-plaintext .highlight, .language-plaintext code  {
