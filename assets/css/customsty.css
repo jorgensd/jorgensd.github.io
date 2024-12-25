@@ -157,8 +157,7 @@ a::selection {
   background-color: rgb(207, 195, 30);
 } */
 ::selection {
-  background-color: rgb(26, 95, 180);
-  -webkit-text-stroke-width: thin;
+  text-decoration: underline dotted;
 }
 
 .language-plaintext .highlight, .language-plaintext code  {
