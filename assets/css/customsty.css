@@ -149,7 +149,7 @@ a:hover {
   max-width:  750px
 }
 
-.inner:selection {
+.inner::selection {
   background-color: rgb(207, 195, 30);
 }
 
