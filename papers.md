@@ -5,13 +5,15 @@ title: Papers
 ## 2024
 
 {% include _paper.html
-id = "smart_preprint"
+id = "smart_nature"
     author = "Emmet A. Francis and Justin G. Laughlin and Jørgen S. Dokken and Henrik N. T. Finsberg and Christopher T. Lee and Marie E. Rognes and Padmini Rangamani"
-    title = "Spatial modeling algorithms for reactions and transport (SMART) in biological cells"
-    month = "may"
+    title = "Spatial modeling algorithms for reactions and transport in biological cells"
+    month = "Dec"
     year = "2024"
-    arxiv = "2405.15968"
-    bib = "francis2024preprint.bib"
+    doi = "10.1038/s43588-024-00745-x"
+    bib = "francis2024nature.bib"
+    issn = "2662-8457"
+    journal = "Nature Computational Science"
 %}
 
 
