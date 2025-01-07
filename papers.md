@@ -4,7 +4,7 @@ title: Publication list
 
 ## 2025
 
-{% include \_paper.html
+{% include _paper.html
 id = "brunatova_wss_arxiv"
 author = "Jana Brunátová and Jørgen Schartum Dokken and Kristian Valen-Sendstad and Jaroslav Hron"
 title = "On the numerical evaluation of wall shear stress using the finite element method"
