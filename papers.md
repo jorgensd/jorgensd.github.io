@@ -12,7 +12,7 @@ month = "Jan"
 year = "2025"
 arxiv = "2501.02987"
 bib = "dokken2025wss.bib"
-}
+%}
 
 ## 2024
 
