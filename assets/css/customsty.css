@@ -148,16 +148,10 @@ a:hover {
   width: unset;
   max-width:  750px
 }
-/* 
-p::selection {
-  background-color: rgb(207, 195, 30);
-}
 
-a::selection {
-
-} */
 ::selection {
-  background-color: rgb(208, 0, 0);
+  color: white;
+  background-color: blue;
 }
 
 .language-plaintext .highlight, .language-plaintext code  {

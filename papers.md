@@ -2,6 +2,18 @@
 title: Papers
 ---
 
+## 2025
+
+{% include \_paper.html
+id = "brunatova_wss_arxiv"
+author = "Jana Brunátová and Jørgen Schartum Dokken and Kristian Valen-Sendstad and Jaroslav Hron"
+title = "On the numerical evaluation of wall shear stress using the finite element method"
+month = "Jan"
+year = "2025"
+arxiv = "2501.02987"
+bib = "dokken2025wss.bib"
+}
+
 ## 2024
 
 {% include _paper.html
@@ -16,7 +28,6 @@ id = "smart_nature"
     journal = "Nature Computational Science"
 %}
 
-
 {% include _paper.html
 id = "adios4dolfinx"
     author = "Dokken, Jørgen S."
@@ -30,7 +41,6 @@ id = "adios4dolfinx"
     year = "2024"
     bib = "dokken2024adios.bib"
 %}
-
 
 ## 2023
 

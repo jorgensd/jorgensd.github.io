@@ -12,8 +12,13 @@ From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Sha
 
 # Latest news
 
+## 2025
+
+- **New preprint**: [On the numerical evaluation of wall shear stress using the finite element method](papers.md#brunatova_wss_arxiv) available at: [DOI: 10.48550/arXiv.2501.02987](https://doi.org/10.48550/arXiv.2501.02987)
+
 ## 2024
-- **New paper**: [Spatial modeling algorithms for reactions and transport in biological cells](papers.md#smart_nature) avaiable at: [DOI: 10.1038/s43588-024-00745-x](https://doi.org/10.1038/s43588-024-00745-x). For a general summary see: [UCSD Research Alert](https://today.ucsd.edu/story/new-software-unlocks-secrets-of-cell-signaling)
+
+- **New paper**: [Spatial modeling algorithms for reactions and transport in biological cells](papers.md#smart_nature) available at: [DOI: 10.1038/s43588-024-00745-x](https://doi.org/10.1038/s43588-024-00745-x). For a general summary see: [UCSD Research Alert](https://today.ucsd.edu/story/new-software-unlocks-secrets-of-cell-signaling)
 - **October 21st-22nd**: Two-day DOLFINx workshop at the [MIT Plasma Science and Fusion Center](https://www.psfc.mit.edu/). The workshop material is available at [https://jsdokken.com/FEniCS-workshop](https://jsdokken.com/FEniCS-workshop).
 - **October 4th,11th**: I will give two lectures as part of MU5MES01 of the Solid Mechanics of the Solid Mechanics Master of Sorbonne Université and ENPC. See [MU5MES01@Github](https://github.com/msolides-2024/MU5MES01-2024) for more information.
 - **October 1st**: I will give an introduction to the FEniCS library at École des Ponts, Paris. See [Laboratory Navier](https://navier-lab.fr/agenda/seminaire-msa-jorgen-s-dokken/) for more information.
