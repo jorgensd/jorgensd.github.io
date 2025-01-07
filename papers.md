@@ -11,7 +11,7 @@ title = "On the numerical evaluation of wall shear stress using the finite eleme
 month = "Jan"
 year = "2025"
 arxiv = "2501.02987"
-bib = "dokken2025wss.bib"
+bib = "brunatova2025wss.bib"
 %}
 
 ## 2024
