@@ -1,5 +1,5 @@
 ---
-title: Papers
+title: Publication list
 ---
 
 ## 2025
