@@ -5,6 +5,16 @@ title: Publication list
 ## 2025
 
 {% include _paper.html
+id = "lvpp_arxiv"
+author = "Jørgen S. Dokken, Patrick E. Farrell, Brendan Keith, Ioannis P. A. Papadopoulos, Thomas M. Surowiec"
+title = "The latent variable proximal point algorithm for variational problems with inequality constraints"
+month = "Mar"
+year = "2025"
+arxiv = "2503.05672"
+bib = "lvpp2025.bib"
+%}
+
+{% include _paper.html
 id = "brunatova_wss_arxiv"
 author = "Jana Brunátová and Jørgen Schartum Dokken and Kristian Valen-Sendstad and Jaroslav Hron"
 title = "On the numerical evaluation of wall shear stress using the finite element method"
