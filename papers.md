@@ -5,13 +5,13 @@ title: Publication list
 ## 2025
 
 {% include _paper.html
-id = "lvpp_arxiv"
+id = "lvpp2025cmame"
 author = "Jørgen S. Dokken, Patrick E. Farrell, Brendan Keith, Ioannis P. A. Papadopoulos, Thomas M. Surowiec"
 title = "The latent variable proximal point algorithm for variational problems with inequality constraints"
-month = "Mar"
+month = "Oct"
 year = "2025"
-arxiv = "2503.05672"
-bib = "lvpp2025.bib"
+doi = "10.1016/j.cma.2025.118181"
+bib = "lvpp2025cmame.bib"
 %}
 
 {% include _paper.html
