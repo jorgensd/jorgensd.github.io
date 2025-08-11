@@ -58,4 +58,4 @@ I am involved in the development of the following software:
   - [dolfin-adjoint 2018.1: automated adjoints for FEniCS and Firedrake](papers.md#mitusch2019pyadjoint)
 - [Scientific Computing @ Simula](https://scientificcomputing.github.io/) A web resource for best software practices for academics using Python
 - [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc) - An extension to DOLFINx supporting multi-point constraints (such as contact and slip conditions)
-- [adios4dolfinx](papers.md#adios4dolfinx)
+- [adios4dolfinx](papers.md#adios4dolfinx) - A checkpointing framework for DOLFINx
