@@ -15,12 +15,12 @@ bib = "lvpp2025cmame.bib"
 %}
 
 {% include _paper.html
-id = "brunatova_wss_arxiv"
+id = "brunatova_wss_2025"
 author = "Jana Brunátová and Jørgen Schartum Dokken and Kristian Valen-Sendstad and Jaroslav Hron"
 title = "On the numerical evaluation of wall shear stress using the finite element method"
-month = "Jan"
+month = "Sep"
 year = "2025"
-arxiv = "2501.02987"
+doi = "10.1002/cnm.70086"
 bib = "brunatova2025wss.bib"
 %}
 

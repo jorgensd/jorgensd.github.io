@@ -18,8 +18,8 @@ From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Sha
 
 ## 2025
 
+- **New paper**: [On the numerical evaluation of wall shear stress using the finite element method](papers.md#brunatova_wss_2025) available at: [DOI: 10.1002/cnm.70086](https://doi.org/10.1002/cnm.70086)
 - **New paper**: [The latent variable proximal point algorithm for variational problems with inequality constraints](papers.md#lvpp2025cmame) available at: [DOI: 10.1016/j.cma.2025.118181](https://doi.org/10.1016/j.cma.2025.118181) published in _Computer Methods in Applied Mechanics and Engineering_
-- **New preprint**: [On the numerical evaluation of wall shear stress using the finite element method](papers.md#brunatova_wss_arxiv) available at: [DOI: 10.48550/arXiv.2501.02987](https://doi.org/10.48550/arXiv.2501.02987)
 
 ## 2024
 
