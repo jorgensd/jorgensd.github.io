@@ -1,24 +1,12 @@
 ![Image of J.S.Dokken](assets/img/cropped.jpg){: .image-left }
 
-# About me
-
-I am currently employed at [Simula Research Laboratory](https://www.simula.no/people/dokken) as a Senior Research Engineer.
-I am also one of the administrators of the [FEniCS Discourse forum](https://fenicsproject.discourse.group/) and I am member of the [FEniCS Steering Council](https://github.com/FEniCS/governance/blob/master/governance.md#steering-council).
-My focus is on finite element related software, usually extensions to the FEniCS project, or applications where FEniCS is employed.
-
-From 2019-2022 I worked as a Postdoctoral Research Associate at the University of Cambridge, working on the ASiMoV project with Chris Richardson and Garth N. Wells on the [ASiMoV](https://gtr.ukri.org/projects?ref=EP%2FS005072%2F1#/tabOverview)-project.
-The main goal of this project was to do the worlds first, high fidelity simulation of a complete gas-turbine engine during operation, simultaneously including the effects of thermo-mechanics, electromagnetics, and CFD.
-My main focus during this project was contact mechanics, multi-point constraints and large scale simulations with MPI.
-
-From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Shape Optimization with Finite Element Methods.
-
-<br style="clear:both">
-
 # Latest news
 
 ## 2025
 
 - **New paper**: [On the numerical evaluation of wall shear stress using the finite element method](papers.md#brunatova_wss_2025) available at: [DOI: 10.1002/cnm.70086](https://doi.org/10.1002/cnm.70086) published in _International Journal for Numerical Methods in Biomedical Engineering_
+- **New preprint**: [FESTIM v2.0: Upgraded framework for multi-species hydrogen transport and enhanced performance](papers.md#dark2025festim) available at [DOI: 10.48550/arXiv.2509.24760](https://doi.org/10.48550/arXiv.2509.24760)
+- **New preprint**: [DefElement: an encyclopedia of finite element definitions](papers.md#scroggs2025element) available at [DOI: 10.48550/arXiv.2506.20188](https://doi.org/10.48550/arXiv.2506.20188)
 - **New paper**: [The latent variable proximal point algorithm for variational problems with inequality constraints](papers.md#lvpp2025cmame) available at: [DOI: 10.1016/j.cma.2025.118181](https://doi.org/10.1016/j.cma.2025.118181) published in _Computer Methods in Applied Mechanics and Engineering_
 
 ## 2024
@@ -37,6 +25,12 @@ From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Sha
 - Older news can be found [here](older_news.md)
 
 <br style="clear:both">
+
+# About me
+
+I am currently employed at [Simula Research Laboratory](https://www.simula.no/people/dokken) as a Senior Research Engineer.
+I am also one of the administrators of the [FEniCS Discourse forum](https://fenicsproject.discourse.group/) and I am member of the [FEniCS Steering Council](https://github.com/FEniCS/governance/blob/master/governance.md#steering-council).
+My focus is on finite element related software, usually extensions to the FEniCS project, or applications where FEniCS is employed.
 
 ## Software
 
@@ -59,3 +53,12 @@ I am involved in the development of the following software:
 - [Scientific Computing @ Simula](https://scientificcomputing.github.io/) A web resource for best software practices for academics using Python
 - [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc) - An extension to DOLFINx supporting multi-point constraints (such as contact and slip conditions)
 - [adios4dolfinx](papers.md#adios4dolfinx) - A checkpointing framework for DOLFINx
+
+
+From 2019-2022 I worked as a Postdoctoral Research Associate at the University of Cambridge, working on the ASiMoV project with Chris Richardson and Garth N. Wells on the [ASiMoV](https://gtr.ukri.org/projects?ref=EP%2FS005072%2F1#/tabOverview)-project.
+The main goal of this project was to do the worlds first, high fidelity simulation of a complete gas-turbine engine during operation, simultaneously including the effects of thermo-mechanics, electromagnetics, and CFD.
+My main focus during this project was contact mechanics, multi-point constraints and large scale simulations with MPI.
+
+From 2016-2019 I took my PhD at Simula Research Laboratory on the subject of Shape Optimization with Finite Element Methods.
+
+<br style="clear:both">

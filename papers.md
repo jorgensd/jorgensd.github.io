@@ -15,6 +15,28 @@ bib = "lvpp2025cmame.bib"
 %}
 
 {% include _paper.html
+id = "dark2025festim"
+author = "James Dark, Rémi Delaporte-Mathurin, Jørgen S. Dokken, Huihua Yang, Chirag Khurana, Kaelyn Dunnell, Gabriele Ferrero, Vladimir Kulagin, Samuele Meschini"
+title = "FESTIM v2.0: Upgraded framework for multi-species hydrogen transport and enhanced performance"
+month="Sep"
+year = "2025"
+doi = "10.48550/arXiv.2509.24760"
+arxiv = "2509.24760"
+bib = "dark2025festim"
+%}
+
+{% include _paper.html
+id = "scroggs2025defelement"
+author = "Matthew W. Scroggs, Pablo D. Brubeck, Joseph P. Dean, Jørgen S. Dokken, India Marsden"
+title = "DefElement: an encyclopedia of finite element definitions"
+month = "Jun"
+year = "2025"
+doi = "10.48550/arXiv.2506.20188"
+arxiv = "2506.20188"
+bib = "scroggs2025element"
+%}
+
+{% include _paper.html
 id = "brunatova_wss_2025"
 author = "Jana Brunátová and Jørgen Schartum Dokken and Kristian Valen-Sendstad and Jaroslav Hron"
 title = "On the numerical evaluation of wall shear stress using the finite element method"
