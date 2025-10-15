@@ -5,6 +5,17 @@ title: Publication list
 ## 2025
 
 {% include _paper.html
+id = "yamamoto2025vasp"
+author = "Kei Yamamoto and David A. Bruneau and Johannes Ring and Jørgen S. Dokken and Kristian Valen-Sendstad"
+title = "VaSP: Vascular Fluid-Structure Interaction Pipeline"
+month = "Oct"
+year = "2025"
+doi = "10.1016/j.softx.2025.102392"
+bib = "yamamoto2025vasp.bib"
+%}
+
+
+{% include _paper.html
 id = "lvpp2025cmame"
 author = "Jørgen S. Dokken, Patrick E. Farrell, Brendan Keith, Ioannis P. A. Papadopoulos, Thomas M. Surowiec"
 title = "The latent variable proximal point algorithm for variational problems with inequality constraints"
