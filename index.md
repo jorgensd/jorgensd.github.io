@@ -5,7 +5,7 @@
 ## 2025
 
 - **Public talk at EPFL**: On November 18th I'll present *Multidimensional modelling in DOLFINx* at EPFL. The seminar is open to the public, for more information, see [https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/](https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/)
-- **New paper**: [VaSP: Vascular Fluid-Structure Interaction Pipeline](papers.md#yamamoto2025vasp) available at: [DOI: 10.1016/j.softx.2025.102392](https://10.1016/j.softx.2025.102392)
+- **New paper**: [VaSP: Vascular Fluid-Structure Interaction Pipeline](papers.md#yamamoto2025vasp) available at: [DOI: 10.1016/j.softx.2025.102392](https://doi.org/10.1016/j.softx.2025.102392)
 - **New paper**: [On the numerical evaluation of wall shear stress using the finite element method](papers.md#brunatova_wss_2025) available at: [DOI: 10.1002/cnm.70086](https://doi.org/10.1002/cnm.70086) published in _International Journal for Numerical Methods in Biomedical Engineering_
 - **New preprint**: [FESTIM v2.0: Upgraded framework for multi-species hydrogen transport and enhanced performance](papers.md#dark2025festim) available at [DOI: 10.48550/arXiv.2509.24760](https://doi.org/10.48550/arXiv.2509.24760)
 - **New preprint**: [DefElement: an encyclopedia of finite element definitions](papers.md#scroggs2025element) available at [DOI: 10.48550/arXiv.2506.20188](https://doi.org/10.48550/arXiv.2506.20188)
