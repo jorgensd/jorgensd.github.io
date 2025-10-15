@@ -43,8 +43,10 @@ I am involved in the development of the following software:
   End-user and core development resulting in the following papers, software and preprints
 
   - [DOLFINx: The next generation FEniCS problem solving environment](papers.md#dolfinx2023preprint)
-  - [FESTIM: An open-source code for hydrogen transport simulations](https://festim.readthedocs.io/en/latest/)
+  - [FEniCSx_ii: FEniCSx trace - A module for non-conforming 3D-1D coupling](https://scientificcomputing.github.io/fenicsx_ii)
   - [SciFEM: Convenience tools and extensions to FEniCSx](https://scientificcomputing.github.io/scifem/)
+  - [FEniCS-in-the-wild: Biomedical examples of FEniCS using wildmeshing](https://scientificcomputing.github.io/fenics-in-the-wild/)
+  - [FESTIM: An open-source code for hydrogen transport simulations](https://festim.readthedocs.io/en/latest/)
   - [Construction of arbitrary order finite element degree-of-freedom maps on polygonal and polyhedral cell meshes](papers.md#scroggs2022dofs)
   - [A multimesh finite element method for the Navier--Stokes equations based on projection methods](papers.md#dokken2020navier)
   - [Shape Optimization Using the Finite Element Method on Multiple Meshes with Nitsche Coupling](papers.md#dokken2019shape)
