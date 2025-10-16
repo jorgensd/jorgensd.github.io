@@ -5,6 +5,16 @@ title: Publication list
 ## 2025
 
 {% include _paper.html
+id = "yamamoto2025fsi"
+author = "Kei Yamamoto and David A. Bruneau and Jørgen S. Dokken and David A. Steinman and Kristian Valen-Sendstad"
+title = "Impact of Wall Property and Flow Rate Assumptions on Simulations of Flow-Induced Vibration of Intracranial Aneurysms"
+month = "Oct"
+year = "2025"
+doi = "10.1002/cnm.70101"
+bib = "yamamoto2025fsi.bib"
+%}
+
+{% include _paper.html
 id = "yamamoto2025vasp"
 author = "Kei Yamamoto and David A. Bruneau and Johannes Ring and Jørgen S. Dokken and Kristian Valen-Sendstad"
 title = "VaSP: Vascular Fluid-Structure Interaction Pipeline"

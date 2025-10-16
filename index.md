@@ -4,6 +4,7 @@
 
 ## 2025
 
+- **New paper**: [Impact of Wall Property and Flow Rate Assumptions on Simulations of Flow-Induced Vibration of Intracranial Aneurysms](papers.md#yamamoto2025fsi) available at: [DOI: 10.1002/cnm.70101](https://doi.org/10.1002/cnm.70101).
 - **Public talk at EPFL**: On November 18th I'll present *Multidimensional modelling in DOLFINx* at EPFL. The seminar is open to the public, for more information, see [https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/](https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/)
 - **New paper**: [VaSP: Vascular Fluid-Structure Interaction Pipeline](papers.md#yamamoto2025vasp) available at: [DOI: 10.1016/j.softx.2025.102392](https://doi.org/10.1016/j.softx.2025.102392)
 - **New paper**: [On the numerical evaluation of wall shear stress using the finite element method](papers.md#brunatova_wss_2025) available at: [DOI: 10.1002/cnm.70086](https://doi.org/10.1002/cnm.70086) published in _International Journal for Numerical Methods in Biomedical Engineering_
