@@ -6,7 +6,7 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.16.2
+#       jupytext_version: 1.18.1
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -22,7 +22,8 @@
 #
 # This tutorial can be downloaded as a [Python-file](pygmsh_tutorial.py) or as a [Jupyter notebook](pygmsh_tutorial.ipynb)
 #
-# Prerequisites for this tutorial is to install [pygmsh](https://pypi.org/project/pygmsh), [meshio](https://pypi.org/project/meshio) and [gmsh](https://gmsh.info/bin/Linux/gmsh-4.11.1-Linux64.tgz). All of these dependencies can be found in the docker image
+# Prerequisites for this tutorial is to install [pygmsh](https://pypi.org/project/pygmsh),
+# [meshio](https://pypi.org/project/meshio) and [gmsh](https://gmsh.info/bin/Linux/gmsh-4.11.1-Linux64.tgz). All of these dependencies can be found in the docker image
 # `ghcr.io/jorgensd/jorgensd.github.io:main`, which can be ran on any computer with docker using
 #
 # ```bash
@@ -30,7 +31,8 @@
 # ```
 #
 # ## <a name="first"></a> 1. How to create a mesh with pygmsh
-# In this tutorial, we will learn how to create a channel with a circular obstacle, as used in the [DFG-2D 2 Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_benchmark2_re100.html).
+# In this tutorial, we will learn how to create a channel with a circular obstacle, as used in the
+# [DFG-2D 2 Turek benchmark](http://www.featflow.de/en/benchmarks/cfdbenchmarking/flow/dfg_benchmark2_re100.html).
 #
 # To do this, we use pygmsh.
 # First we create an empty geometry and the circular obstacle:
@@ -79,7 +81,9 @@ plane_surface = model.add_plane_surface(channel_loop, holes=[circle.curve_loop])
 model.synchronize()
 # -
 
-# The final step before mesh generation is to mark the different boundaries and the volume mesh. Note that with pygmsh, boundaries with the same tag has to be added simultaneously. In this example this means that we have to add the top and
+# The final step before mesh generation is to mark the different boundaries and the volume mesh.
+# Note that with pygmsh, boundaries with the same tag has to be added simultaneously.
+# In this example this means that we have to add the top and
 #  bottom wall in one function call.
 
 volume_marker = 6
@@ -89,7 +93,8 @@ model.add_physical([channel_lines[2]], "Outflow")
 model.add_physical([channel_lines[1], channel_lines[3]], "Walls")
 model.add_physical(circle.curve_loop.curves, "Obstacle")
 
-# We generate the mesh using the pygmsh function `generate_mesh`. Generate mesh returns a `meshio.Mesh`. However, this mesh is tricky to extract physical tags from. Therefore we write the mesh to file using the `gmsh.write` function.
+# We generate the mesh using the pygmsh function `generate_mesh`. Generate mesh returns a `meshio.Mesh`. However, this mesh is tricky to extract physical tags from.
+# Therefore we write the mesh to file using the `gmsh.write` function.
 
 geometry.generate_mesh(dim=2)
 gmsh.write("mesh.msh")
@@ -102,7 +107,9 @@ geometry.__exit__()
 
 mesh_from_file = meshio.read("mesh.msh")
 
-# Now that we have loaded the mesh, we need to extract the cells and physical data. We need to create a separate file for the facets (lines), which we will use when we define boundary conditions in DOLFIN/DOLFINx. We do this with the following convenience function. Note that as we would like a 2 dimensional mesh, we need to remove the z-values in the mesh coordinates.
+# Now that we have loaded the mesh, we need to extract the cells and physical data.
+# We need to create a separate file for the facets (lines), which we will use when we define boundary conditions in DOLFIN/DOLFINx.
+# We do this with the following convenience function. Note that as we would like a 2 dimensional mesh, we need to remove the z-values in the mesh coordinates.
 
 
 def create_mesh(mesh, cell_type, prune_z=False):
@@ -142,13 +149,16 @@ ball = model3D.add_ball([0.5, 0.5, 0.5], 0.25)
 
 # In this demo, we would like to make a mesh that is the union of these three objects.
 # In addition, we would like the internal boundary of the sphere to be preserved in the final mesh.
-# We will do this by using boolean operations. First we make a `boolean_union` of the two boxes (whose internal boundaries will not be preserved). Then, we use boolean fragments to perserve the outer boundary of the sphere.
+# We will do this by using boolean operations. First we make a `boolean_union` of the two boxes (whose internal boundaries will not be preserved).
+# Then, we use boolean fragments to perserve the outer boundary of the sphere.
 
 union = model3D.boolean_union([box0, box1])
 union_minus_ball = model3D.boolean_fragments(union, ball)
 model3D.synchronize()
 
-# To create physical markers for the two regions, we use the `add_physical` function. This function only works nicely if the domain whose boundary should be preserved (the sphere) is fully embedded in the other domain (the union of boxes). For more complex operations, it is recommened to do the tagging of entities in the gmsh GUI, as explained in the [GMSH tutorial](tutorial_gmsh.md).
+# To create physical markers for the two regions, we use the `add_physical` function.
+# This function only works nicely if the domain whose boundary should be preserved (the sphere) is fully embedded in the other domain (the union of boxes).
+# For more complex operations, it is recommened to do the tagging of entities in the gmsh GUI, as explained in the [GMSH tutorial](tutorial_gmsh.md).
 
 model3D.add_physical(union, "Union")
 model3D.add_physical(union_minus_ball, "Union minus ball")
