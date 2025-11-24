@@ -22,7 +22,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       # Runs a single command using the runners shell
       - name: Run python scripts
@@ -39,6 +39,6 @@ jobs:
     runs-on: ubuntu-24.04
     container: ghcr.io/fenics/dolfinx/dolfinx:stable
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Run python scripts
         run: python3 src/tutorial_gmsh.py
