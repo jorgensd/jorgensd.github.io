@@ -2,10 +2,14 @@
 
 # Latest news
 
+## 2026
+
+- **Public talk for IDA**: On January 29th, Jack S. Hale and I will present _Open-source simulation tools – opportunities and limitations_ for the Danish Society of Engineers (IDA). To sign up see: [IDA: Events and courses](https://ida.dk/en/arrangementer-og-kurser/arrangementer/open-source-simulation-tools-opportunities-and-limitations-363941)
+
 ## 2025
 
 - **New paper**: [Impact of Wall Property and Flow Rate Assumptions on Simulations of Flow-Induced Vibration of Intracranial Aneurysms](papers.md#yamamoto2025fsi) available at: [DOI: 10.1002/cnm.70101](https://doi.org/10.1002/cnm.70101).
-- **Public talk at EPFL**: On November 18th I'll present *Multidimensional modelling in DOLFINx* at EPFL. The seminar is open to the public, for more information, see [https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/](https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/)
+- **Public talk at EPFL**: On November 18th I'll present _Multidimensional modelling in DOLFINx_ at EPFL. The seminar is open to the public, for more information, see [https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/](https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/)
 - **New paper**: [VaSP: Vascular Fluid-Structure Interaction Pipeline](papers.md#yamamoto2025vasp) available at: [DOI: 10.1016/j.softx.2025.102392](https://doi.org/10.1016/j.softx.2025.102392)
 - **New paper**: [On the numerical evaluation of wall shear stress using the finite element method](papers.md#brunatova_wss_2025) available at: [DOI: 10.1002/cnm.70086](https://doi.org/10.1002/cnm.70086) published in _International Journal for Numerical Methods in Biomedical Engineering_
 - **New preprint**: [FESTIM v2.0: Upgraded framework for multi-species hydrogen transport and enhanced performance](papers.md#dark2025festim) available at [DOI: 10.48550/arXiv.2509.24760](https://doi.org/10.48550/arXiv.2509.24760)
@@ -58,7 +62,6 @@ I am involved in the development of the following software:
 - [Scientific Computing @ Simula](https://scientificcomputing.github.io/) A web resource for best software practices for academics using Python
 - [dolfinx_mpc](https://github.com/jorgensd/dolfinx_mpc) - An extension to DOLFINx supporting multi-point constraints (such as contact and slip conditions)
 - [adios4dolfinx](papers.md#adios4dolfinx) - A checkpointing framework for DOLFINx
-
 
 From 2019-2022 I worked as a Postdoctoral Research Associate at the University of Cambridge, working on the ASiMoV project with Chris Richardson and Garth N. Wells on the [ASiMoV](https://gtr.ukri.org/projects?ref=EP%2FS005072%2F1#/tabOverview)-project.
 The main goal of this project was to do the worlds first, high fidelity simulation of a complete gas-turbine engine during operation, simultaneously including the effects of thermo-mechanics, electromagnetics, and CFD.
