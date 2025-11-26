@@ -1,5 +1,6 @@
----
+dar---
 title: Publication list
+
 ---
 
 ## 2025
@@ -24,7 +25,6 @@ doi = "10.1016/j.softx.2025.102392"
 bib = "yamamoto2025vasp.bib"
 %}
 
-
 {% include _paper.html
 id = "lvpp2025cmame"
 author = "Jørgen S. Dokken, Patrick E. Farrell, Brendan Keith, Ioannis P. A. Papadopoulos, Thomas M. Surowiec"
@@ -43,7 +43,7 @@ month="Sep"
 year = "2025"
 doi = "10.48550/arXiv.2509.24760"
 arxiv = "2509.24760"
-bib = "dark2025festim"
+bib = "dark2025festim.bib"
 %}
 
 {% include _paper.html
