@@ -1,7 +1,20 @@
-dar---
+---
 title: Publication list
 
 ---
+
+## 2026
+
+
+{% include _paper.html
+id = "dokken2026mri2fem"
+author = "Jørgen S. Dokken and Kent-Andre Mardal and Marie E. Rognes and Lars Magnus Valnes and Vegard Vinje"
+title = " Mathematical Modelling of the Human Brain II - From Glymphatics to Deep Learning"
+month = "Jan"
+year = "2026"
+url = "https://link.springer.com/book/9783032006783"
+bib = "dokken2026mri2fem.bib"
+%}
 
 ## 2025
 

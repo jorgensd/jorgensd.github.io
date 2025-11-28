@@ -4,6 +4,8 @@
 
 ## 2026
 
+- **New book**: I am part of the editorial team of [Mathematical Modelling of the Human Brain II](papers.md#dokken2026mri2fem). The book will be open access and available at:
+  [Springer Nature Link](https://link.springer.com/book/9783032006783).
 - **Public talk for IDA**: On January 29th, Jack S. Hale and I will present _Open-source simulation tools – opportunities and limitations_ for the Danish Society of Engineers (IDA). To sign up see: [IDA: Events and courses](https://ida.dk/en/arrangementer-og-kurser/arrangementer/open-source-simulation-tools-opportunities-and-limitations-363941)
 
 ## 2025
