@@ -4,6 +4,7 @@
 
 ## 2026
 
+- **New paper**: [FESTIM v2.0: Upgraded framework for multi-species hydrogen transport and enhanced performance](papers.md#dark2026festim) available at [DOI: 10.1016/j.ijhydene.2026.153987](https://doi.org/10.1016/j.ijhydene.2026.153987)
 - **New book**: I am part of the editorial team of [Mathematical Modelling of the Human Brain II](papers.md#dokken2026mri2fem). The book will be open access and available at:
   [Springer Nature Link](https://doi.org/10.1007/978-3-032-00679-0).
 - **Public talk for IDA**: On January 29th, Jack S. Hale and I will present _Open-source simulation tools – opportunities and limitations_ for the Danish Society of Engineers (IDA). To sign up see: [IDA: Events and courses](https://ida.dk/en/arrangementer-og-kurser/arrangementer/open-source-simulation-tools-opportunities-and-limitations-363941)
@@ -14,7 +15,6 @@
 - **Public talk at EPFL**: On November 18th I'll present _Multidimensional modelling in DOLFINx_ at EPFL. The seminar is open to the public, for more information, see [https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/](https://memento.epfl.ch/event/multidimensional-modelling-in-dolfinx/)
 - **New paper**: [VaSP: Vascular Fluid-Structure Interaction Pipeline](papers.md#yamamoto2025vasp) available at: [DOI: 10.1016/j.softx.2025.102392](https://doi.org/10.1016/j.softx.2025.102392)
 - **New paper**: [On the numerical evaluation of wall shear stress using the finite element method](papers.md#brunatova_wss_2025) available at: [DOI: 10.1002/cnm.70086](https://doi.org/10.1002/cnm.70086) published in _International Journal for Numerical Methods in Biomedical Engineering_
-- **New preprint**: [FESTIM v2.0: Upgraded framework for multi-species hydrogen transport and enhanced performance](papers.md#dark2025festim) available at [DOI: 10.48550/arXiv.2509.24760](https://doi.org/10.48550/arXiv.2509.24760)
 - **New preprint**: [DefElement: an encyclopedia of finite element definitions](papers.md#scroggs2025element) available at [DOI: 10.48550/arXiv.2506.20188](https://doi.org/10.48550/arXiv.2506.20188)
 - **New paper**: [The latent variable proximal point algorithm for variational problems with inequality constraints](papers.md#lvpp2025cmame) available at: [DOI: 10.1016/j.cma.2025.118181](https://doi.org/10.1016/j.cma.2025.118181) published in _Computer Methods in Applied Mechanics and Engineering_
 

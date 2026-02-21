@@ -49,14 +49,13 @@ bib = "lvpp2025cmame.bib"
 %}
 
 {% include _paper.html
-id = "dark2025festim"
-author = "James Dark, Rémi Delaporte-Mathurin, Jørgen S. Dokken, Huihua Yang, Chirag Khurana, Kaelyn Dunnell, Gabriele Ferrero, Vladimir Kulagin, Samuele Meschini"
+id = "dark2026festim"
+author = "James Dark, Rémi Delaporte-Mathurin, Jørgen S. Dokken, Huihua Yang, Chirag Khurana, Kaelyn Dunnell, Gabriele Ferrero, Vladimir Kulagin, Samuele Meschini, Jonathan Dufour, Etienne A. Hodille"
 title = "FESTIM v2.0: Upgraded framework for multi-species hydrogen transport and enhanced performance"
-month="Sep"
-year = "2025"
-doi = "10.48550/arXiv.2509.24760"
-arxiv = "2509.24760"
-bib = "dark2025festim.bib"
+month="Feb"
+year = "2026"
+doi = "10.1016/j.ijhydene.2026.153987"
+bib = "dark2026festim.bib"
 %}
 
 {% include _paper.html
